@@ -332,6 +332,12 @@
     targets.forEach((t) => io.observe(t));
   }
 
+  // teaser cards: open the matching map tab and scroll to the map
+  $$('[data-open-map]').forEach((b) => b.addEventListener('click', () => {
+    $(`[data-map-view="${b.dataset.openMap}"]`)?.click();
+    $('#map')?.scrollIntoView({ behavior: motion ? 'smooth' : 'auto' });
+  }));
+
   const y = $('#year');
   if (y) y.textContent = new Date().getFullYear();
 })();
