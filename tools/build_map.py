@@ -169,8 +169,8 @@ for label, lat, lon, size, cls in [
 nx, ny = pt(46.5205, -94.2886)
 svg.append(f'<g class="map-town"><text x="{int(nx) - 2}" y="{int(ny) - 22}" text-anchor="middle" font-size="17">Nisswa</text></g>')
 if TRAILS:
-    svg.append('<g class="map-trail">' + ''.join(f'<path d="{d}"/>' for d in TRAILS) + '</g>')
-    px_, py_ = pt(46.5262, -94.2855)
+    svg.append('<g class="map-trail" clip-path="url(#map-clip)">' + ''.join(f'<path d="{d}"/>' for d in TRAILS) + '</g>')
+    px_, py_ = pt(46.5300, -94.2935)
     svg.append(f'<text class="map-label map-label-trail" x="{px_}" y="{py_}" font-size="11" text-anchor="middle">Paul Bunyan Trail</text>')
 if ROUTE:
     svg.append(f'<path class="map-route" pathLength="1" d="{ROUTE}"/>')
