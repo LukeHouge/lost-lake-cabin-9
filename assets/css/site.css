@@ -702,3 +702,6 @@ html.motion .map-frame.drawn :is(.map-trail, .map-launch) { opacity: 1; }
 .map-legend .legend-trail i { border-top: 4px dotted #4f8a3c; }
 .map-launch { cursor: pointer; }
 .map-launch.hot circle { fill: var(--deep); stroke: var(--glow); }
+.errands { margin-top: 1.6rem; padding: 1.1rem 1.3rem; border-radius: var(--radius-sm); background: var(--card); border: 1px solid var(--line); }
+.errands h3 { font-size: 1.1rem; margin-bottom: .3rem; }
+.errands p { margin: 0; color: var(--muted); font-size: .95rem; }
