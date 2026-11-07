@@ -1,0 +1,613 @@
+{
+ "boating": [
+  {
+   "num": "1",
+   "name": "Zorbaz on Gull",
+   "lat": 46.511,
+   "lon": -94.3442,
+   "desc": "just down the road, or by boat",
+   "boat": true
+  },
+  {
+   "num": "2",
+   "name": "Bar Harbor Supper Club",
+   "lat": 46.508,
+   "lon": -94.3499,
+   "desc": "built over the water in 1937",
+   "boat": true
+  },
+  {
+   "num": "3",
+   "name": "Downtown Nisswa, by boat!",
+   "lat": 46.5193,
+   "lon": -94.2907,
+   "desc": "public docks at Nisswa Lake Park, then a tunnel under Hwy 371 straight to Main Street: Rafferty's Pizza, Big Axe Brewing, shops",
+   "boat": true,
+   "zoom": "north",
+   "star": true
+  },
+  {
+   "num": "4",
+   "name": "Grand View Lodge",
+   "lat": 46.4931,
+   "lon": -94.3157,
+   "desc": "public docks, beachside cantina, golf: The Pines & The Preserve",
+   "boat": true
+  },
+  {
+   "num": "5",
+   "name": "Hole-in-the-Day Bay",
+   "lat": 46.477,
+   "lon": -94.305,
+   "desc": "the bay of Gull Lake where the Ice Fishing Extravaganza is held every February",
+   "boat": false
+  },
+  {
+   "num": "6",
+   "name": "Dock 77 at Quarterdeck",
+   "lat": 46.4483,
+   "lon": -94.3635,
+   "desc": "open year-round",
+   "boat": true
+  },
+  {
+   "num": "7",
+   "name": "Ernie's on Gull",
+   "lat": 46.423,
+   "lon": -94.3608,
+   "desc": "full marina, deck, live music",
+   "boat": true
+  },
+  {
+   "num": "8",
+   "name": "Gull Point sandbar",
+   "lat": 46.4241,
+   "lon": -94.3745,
+   "desc": "the summer hangout, off the tip of Gull Point",
+   "boat": false
+  },
+  {
+   "num": "9",
+   "name": "Gull Lake Dam & Rec Area",
+   "lat": 46.4111,
+   "lon": -94.3534,
+   "desc": "beach, history, picnics",
+   "boat": false
+  },
+  {
+   "num": "10",
+   "name": "Madden's",
+   "lat": 46.396,
+   "lon": -94.374,
+   "desc": "Parfecto Pizza by boat, beach bay, The Classic golf course",
+   "boat": true
+  },
+  {
+   "num": "11",
+   "name": "Cragun's",
+   "lat": 46.3907,
+   "lon": -94.3701,
+   "desc": "Gull Lake Cruises depart here, Legacy golf. Call the marina about docking.",
+   "boat": false
+  }
+ ],
+ "todo": [
+  {
+   "name": "Fritz Loven Park",
+   "desc": "wooded trails and a quiet spot on the water, right next door",
+   "lat": 46.51619,
+   "lon": -94.35397
+  },
+  {
+   "name": "Downtown Nisswa",
+   "desc": "shops, treats and the Wednesday turtle races (summer)",
+   "lat": 46.5205,
+   "lon": -94.2886
+  },
+  {
+   "name": "Mount Ski Gull",
+   "desc": "downhill skiing and tubing on the west side of Gull Lake",
+   "lat": 46.44485,
+   "lon": -94.37851
+  },
+  {
+   "name": "Brainerd International Raceway",
+   "desc": "drag racing, road racing and track days; watch a race or bring your own car",
+   "lat": 46.41608,
+   "lon": -94.27115
+  },
+  {
+   "name": "Northland Arboretum",
+   "desc": "groomed cross-country ski and walking trails in Baxter",
+   "lat": 46.36926,
+   "lon": -94.22966
+  },
+  {
+   "name": "Crow Wing State Park",
+   "desc": "history and trails where the Crow Wing meets the Mississippi",
+   "lat": 46.27807,
+   "lon": -94.33425
+  },
+  {
+   "name": "Cuyuna Country State Recreation Area",
+   "desc": "nationally known mountain-bike trails and clear mine-pit lakes",
+   "lat": 46.49033,
+   "lon": -94.00706
+  }
+ ],
+ "biking": [
+  {
+   "name": "Gull Lake Trail",
+   "desc": "the paved loop around Gull Lake. Hop on near the cabin",
+   "lat": 46.5135,
+   "lon": -94.3455
+  },
+  {
+   "name": "Paul Bunyan Trail at Nisswa",
+   "desc": "120 miles of paved trail, through the tunnel to downtown Nisswa",
+   "lat": 46.5222258,
+   "lon": -94.2882199,
+   "url": "https://paulbunyantrail.com/trail-maps/"
+  },
+  {
+   "name": "Paul Bunyan Trail at Pequot Lakes",
+   "desc": "ride north for lunch in Pequot Lakes",
+   "lat": 46.6042819,
+   "lon": -94.3123344
+  },
+  {
+   "name": "Cuyuna Country State Recreation Area",
+   "desc": "nationally known mountain-bike trails, about 45 minutes away",
+   "lat": 46.4916293,
+   "lon": -93.9522052
+  }
+ ],
+ "snow": [
+  {
+   "name": "Paul Bunyan Trail at Nisswa",
+   "desc": "winter snowmobile corridor, groomed through the area by the Gull Lake Drifters",
+   "lat": 46.5221757,
+   "lon": -94.2881867,
+   "url": "https://paulbunyantrail.com/trail-maps/"
+  },
+  {
+   "name": "Zorbaz on Gull",
+   "desc": "come by car, boat, snowmobile or float plane",
+   "lat": 46.5110306,
+   "lon": -94.3442406
+  },
+  {
+   "name": "Hole-in-the-Day Bay",
+   "desc": "ice fishing, and the Brainerd Jaycees Ice Fishing Extravaganza every February",
+   "lat": 46.477,
+   "lon": -94.305,
+   "url": "https://www.icefishing.org/ice-fishing-extravaganza/"
+  },
+  {
+   "name": "Mount Ski Gull",
+   "desc": "downhill skiing and tubing on County Road 77",
+   "lat": 46.4423412,
+   "lon": -94.3845177
+  },
+  {
+   "name": "Grand View Lodge ski trails",
+   "desc": "cross-country skiing at The Pines",
+   "lat": 46.4930136,
+   "lon": -94.3156615
+  },
+  {
+   "name": "Cragun's ski trails",
+   "desc": "cross-country skiing on the Pine Beach peninsula",
+   "lat": 46.3907066,
+   "lon": -94.3700922
+  },
+  {
+   "name": "Northland Arboretum",
+   "desc": "about 15 km of groomed cross-country and snowshoe trails",
+   "lat": 46.3692657,
+   "lon": -94.2296621
+  },
+  {
+   "name": "Crow Wing State Park",
+   "desc": "groomed classic ski track along the Mississippi",
+   "lat": 46.278077,
+   "lon": -94.334258
+  }
+ ],
+ "eat": [
+  {
+   "name": "Rafferty's Pizza",
+   "desc": "great pizza and a fun patio on Nisswa's Main Street \u00b7 ~11 min drive",
+   "lat": 46.5202457,
+   "lon": -94.2890147,
+   "pick": false,
+   "boat": false,
+   "url": "https://www.raffertyspizza.com/location/nisswa"
+  },
+  {
+   "name": "Main Street Ale House",
+   "desc": "30+ taps, a good whiskey list and a nice patio \u00b7 ~11 min drive",
+   "lat": 46.5214056,
+   "lon": -94.2895335,
+   "pick": false,
+   "boat": false,
+   "url": "https://www.mainstreetnisswa.com/"
+  },
+  {
+   "name": "Big Axe Brewing",
+   "desc": "Nisswa's craft brewery and taproom \u00b7 ~12 min drive",
+   "lat": 46.5199356,
+   "lon": -94.2891082,
+   "pick": false,
+   "boat": false,
+   "url": "https://www.exploreminnesota.com/profile/big-axe-brewing-company (listing; official site not verified)"
+  },
+  {
+   "name": "Ganley's",
+   "desc": "breakfast and lunch: big omelets, pancakes and sweets \u00b7 ~11 min drive",
+   "lat": 46.5194924,
+   "lon": -94.2885022,
+   "pick": false,
+   "boat": false,
+   "url": null
+  },
+  {
+   "name": "Ye Olde Pickle Factory",
+   "desc": "a longtime Nisswa tavern, open late \u00b7 ~11 min drive",
+   "lat": 46.5214969,
+   "lon": -94.2888444,
+   "pick": false,
+   "boat": false,
+   "url": null
+  },
+  {
+   "name": "StoneHouse Coffee & Roastery",
+   "desc": "local roaster for your morning coffee \u00b7 ~11 min drive",
+   "lat": 46.5198146,
+   "lon": -94.2885756,
+   "pick": false,
+   "boat": false,
+   "url": null
+  },
+  {
+   "name": "The Chocolate Ox",
+   "desc": "ice cream, chocolates and taffy on Main Street \u00b7 ~11 min drive",
+   "lat": 46.5201559,
+   "lon": -94.2888654,
+   "pick": false,
+   "boat": false,
+   "url": "https://thechocolateox.com"
+  },
+  {
+   "name": "Zorbaz on Gull",
+   "desc": "pizza and cold beer right on the water, a Gull Lake classic \u00b7 ~3 min drive",
+   "lat": 46.5110306,
+   "lon": -94.3442406,
+   "pick": true,
+   "boat": true,
+   "url": "https://www.exploreminnesota.com/profile/zorbaz-gull-lake/9186 (official site not verified)"
+  },
+  {
+   "name": "Bar Harbor Supper Club",
+   "desc": "supper club built over the water in 1937 \u00b7 ~3 min drive",
+   "lat": 46.5079584,
+   "lon": -94.3498535,
+   "pick": false,
+   "boat": true,
+   "url": null
+  },
+  {
+   "name": "Cowboy*s",
+   "desc": "hearty bar & grill favorites and a big patio, just minutes from the cabin \u00b7 ~4 min drive",
+   "lat": 46.5003755,
+   "lon": -94.3522344,
+   "pick": false,
+   "boat": false,
+   "url": "https://www.cowboysoflakeshore.com/"
+  },
+  {
+   "name": "Grand View Lodge restaurants",
+   "desc": "Cru, CHAR, Northwoods Pub, Tanque Verde Cantina, Italian Gardens and Freddy's at the Pines (some seasonal) \u00b7 ~8 min drive",
+   "lat": 46.4930136,
+   "lon": -94.3156615,
+   "pick": false,
+   "boat": true,
+   "url": "https://www.grandviewlodge.com/"
+  },
+  {
+   "name": "Dock 77 at Quarterdeck",
+   "desc": "a lakefront patio and a great bar facing the water \u00b7 ~15 min drive",
+   "lat": 46.4483402,
+   "lon": -94.3635271,
+   "pick": true,
+   "boat": true,
+   "url": "https://quarterdeckresort.com/"
+  },
+  {
+   "name": "Ernie's on Gull",
+   "desc": "huge outdoor deck, live music, great pub food and big servings \u00b7 ~26 min drive",
+   "lat": 46.4224091,
+   "lon": -94.3649116,
+   "pick": true,
+   "boat": true,
+   "url": "https://erniesongull.com/"
+  },
+  {
+   "name": "Madden's restaurants",
+   "desc": "The Classic Grill, Mission Point, Fairways and Parfecto Pizza (some seasonal) \u00b7 ~37 min drive",
+   "lat": 46.3958258,
+   "lon": -94.37398,
+   "pick": false,
+   "boat": true,
+   "url": "https://www.maddens.com/dining/"
+  },
+  {
+   "name": "Cragun's Legacy Grill",
+   "desc": "classic American fare at the Legacy courses \u00b7 ~28 min drive",
+   "lat": 46.3879637,
+   "lon": -94.348974,
+   "pick": false,
+   "boat": false,
+   "url": "https://craguns.com/legacy-grill/"
+  },
+  {
+   "name": "Sunshine's Summerhouse",
+   "desc": "great cocktails and tequila, BBQ, and a nice patio \u00b7 ~20 min drive",
+   "lat": 46.4280402,
+   "lon": -94.3859051,
+   "pick": true,
+   "boat": false,
+   "url": "https://sunshinessummerhouse.com"
+  },
+  {
+   "name": "The Preserve Smokehouse",
+   "desc": "seasonal outdoor BBQ at Grand View's Preserve course \u00b7 ~19 min drive",
+   "lat": 46.5673978,
+   "lon": -94.2823964,
+   "pick": false,
+   "boat": false,
+   "url": "https://www.grandviewlodge.com/restaurants/the-preserve-smokehouse"
+  },
+  {
+   "name": "Lucky's Tavern",
+   "desc": "a friendly Pequot Lakes pub with a local following \u00b7 ~18 min drive",
+   "lat": 46.6031376,
+   "lon": -94.3121076,
+   "pick": false,
+   "boat": false,
+   "url": null
+  },
+  {
+   "name": "A-Pine Family Restaurant",
+   "desc": "an up-north family breakfast tradition \u00b7 ~21 min drive",
+   "lat": 46.631924,
+   "lon": -94.3243465,
+   "pick": false,
+   "boat": false,
+   "url": "https://apinerestaurant.com/"
+  },
+  {
+   "name": "Norway Ridge Supper Club",
+   "desc": "classic supper club on Kimble Lake, famous for ribs and prime rib \u00b7 ~38 min drive",
+   "lat": 46.6564175,
+   "lon": -94.196846,
+   "pick": false,
+   "boat": false,
+   "url": "https://www.norwayridge.com/"
+  },
+  {
+   "name": "Antlers at Breezy Point",
+   "desc": "steaks, seafood and a wine bar (seasonal) \u00b7 ~23 min drive",
+   "lat": 46.5947648,
+   "lon": -94.2327113,
+   "pick": false,
+   "boat": false,
+   "url": "https://breezypointresort.com/dine/antlers-restaurant/"
+  },
+  {
+   "name": "Palmer's Grille at Deacon's Lodge",
+   "desc": "a patio overlooking Deacon's Lodge \u00b7 ~27 min drive",
+   "lat": 46.6046075,
+   "lon": -94.2079356,
+   "pick": false,
+   "boat": false,
+   "url": "https://breezypointresort.com/dine/palmers-grille-at-deacons-lodge/"
+  },
+  {
+   "name": "Grizzly's",
+   "desc": "a big menu, great prices and a good beer list \u00b7 ~21 min drive",
+   "lat": 46.3806254,
+   "lon": -94.2553971,
+   "pick": true,
+   "boat": false,
+   "url": "https://grizzlysgrill.com/baxter-mn/"
+  },
+  {
+   "name": "Boulder Tap House",
+   "desc": "a huge beer selection and great wings \u00b7 ~21 min drive",
+   "lat": 46.3784366,
+   "lon": -94.2529959,
+   "pick": true,
+   "boat": false,
+   "url": "https://bouldertaphouse.com/"
+  },
+  {
+   "name": "Black Bear Lodge & Saloon",
+   "desc": "rustic lodge-style steakhouse and saloon \u00b7 ~22 min drive",
+   "lat": 46.3675925,
+   "lon": -94.2450201,
+   "pick": false,
+   "boat": false,
+   "url": "https://www.exploreminnesota.com/profile/black-bear-lodge-saloon/10221"
+  },
+  {
+   "name": "Jack Pine Brewery",
+   "desc": "taproom with a patio and live music \u00b7 ~21 min drive",
+   "lat": 46.3810906,
+   "lon": -94.2569529,
+   "pick": false,
+   "boat": false,
+   "url": "https://www.jackpinebrewery.com/"
+  },
+  {
+   "name": "Woodlore Cider",
+   "desc": "cidery taproom just off Hwy 371 \u00b7 ~17 min drive",
+   "lat": 46.4075128,
+   "lon": -94.2869637,
+   "pick": false,
+   "boat": false,
+   "url": "https://woodlorecider.com/"
+  },
+  {
+   "name": "The Local 218",
+   "desc": "a downtown Brainerd dinner spot \u00b7 ~32 min drive",
+   "lat": 46.366933,
+   "lon": -94.1780683,
+   "pick": false,
+   "boat": false,
+   "url": "https://thelocal218.gotoeat.net/ (listings also cite local-218.com)"
+  },
+  {
+   "name": "b*merri Gastropub",
+   "desc": "gastropub at The Woods \u00b7 ~29 min drive",
+   "lat": 46.4366162,
+   "lon": -94.1701729,
+   "pick": false,
+   "boat": false,
+   "url": "https://www.thewoodsmn.com/brainerd-restaurant-b-merri/"
+  },
+  {
+   "name": "The Barn",
+   "desc": "a Brainerd diner known for Maid-Rites and homemade pie \u00b7 ~28 min drive",
+   "lat": 46.3583712,
+   "lon": -94.198935,
+   "pick": false,
+   "boat": false,
+   "url": "https://thebarnbrainerd.com/menu/"
+  }
+ ],
+ "golf": [
+  {
+   "name": "Grand View: The Pines & The Garden",
+   "desc": "27 picturesque holes (Lakes, Woods and Marsh nines), closest to the cabin \u00b7 ~8 min drive",
+   "lat": 46.4930136,
+   "lon": -94.3156615,
+   "pick": true,
+   "boat": false,
+   "url": "https://www.grandviewlodge.com/golf"
+  },
+  {
+   "name": "Grand View: The Preserve",
+   "desc": "secluded and quiet, with big views from the elevated clubhouse \u00b7 ~19 min drive",
+   "lat": 46.5673978,
+   "lon": -94.2823964,
+   "pick": true,
+   "boat": false,
+   "url": "https://www.grandviewlodge.com/golf"
+  },
+  {
+   "name": "Madden's: The Classic, Pine Beach & Social 9",
+   "desc": "The Classic is #80 on Golf Digest's America's 100 Greatest Public Courses (2025): pristine and wooded, a shot-maker's course \u00b7 ~37 min drive",
+   "lat": 46.3958258,
+   "lon": -94.37398,
+   "pick": true,
+   "boat": false,
+   "url": "https://www.maddens.com/golf/courses/"
+  },
+  {
+   "name": "Cragun's: Lehman 18, Dutch Legacy & Nice 09",
+   "desc": "scenic ridges over the wetlands and fluffy white sand. Dutch Legacy is a Robert Trent Jones Jr. layout \u00b7 ~27 min drive",
+   "lat": 46.3940561,
+   "lon": -94.3501631,
+   "pick": true,
+   "boat": false,
+   "url": "https://craguns.com/golf/"
+  },
+  {
+   "name": "The Gravel Pit",
+   "desc": "13 par-3 holes, unique and great fun for a big group \u00b7 ~24 min drive",
+   "lat": 46.4044856,
+   "lon": -94.3271494,
+   "pick": false,
+   "boat": false,
+   "url": "https://gravelpitgolf.com/"
+  },
+  {
+   "name": "Deacon's Lodge",
+   "desc": "an Arnold Palmer design through the woods and around the lake; our family's favorite course anywhere \u00b7 ~27 min drive",
+   "lat": 46.6039461,
+   "lon": -94.2101147,
+   "pick": true,
+   "boat": false,
+   "url": "https://breezypointresort.com/golf/deacons-lodge/"
+  },
+  {
+   "name": "Breezy Point: Whitebirch & Traditional",
+   "desc": "pretty holes in great condition at Breezy Point Resort \u00b7 ~23 min drive",
+   "lat": 46.5947648,
+   "lon": -94.2327113,
+   "pick": false,
+   "boat": false,
+   "url": "https://breezypointresort.com/golf/whitebirch-brainerd-golf-course/"
+  },
+  {
+   "name": "Whitefish Golf Club",
+   "desc": "quiet, secluded and in great shape \u00b7 ~33 min drive",
+   "lat": 46.6606808,
+   "lon": -94.2374232,
+   "pick": false,
+   "boat": false,
+   "url": "https://whitefishgolf.com/"
+  },
+  {
+   "name": "Crosswoods",
+   "desc": "27 holes near Crosslake \u00b7 ~37 min drive",
+   "lat": 46.6686391,
+   "lon": -94.1068341,
+   "pick": false,
+   "boat": false,
+   "url": "https://crosslakegolf.com/"
+  },
+  {
+   "name": "Golden Eagle",
+   "desc": "hilly, scenic and tucked away in the woods \u00b7 ~62 min drive",
+   "lat": 46.7645481,
+   "lon": -94.0602757,
+   "pick": true,
+   "boat": false,
+   "url": "https://www.golfgoldeneagle.com/"
+  },
+  {
+   "name": "Emily Greens",
+   "desc": "known for one of the biggest greens around \u00b7 ~58 min drive",
+   "lat": 46.7306876,
+   "lon": -93.9875909,
+   "pick": false,
+   "boat": false,
+   "url": "https://www.emilygreens.com/"
+  },
+  {
+   "name": "Jack's 18 at Ruttger's",
+   "desc": "a classic resort course on Bay Lake \u00b7 ~60 min drive",
+   "lat": 46.4092298,
+   "lon": -93.8721237,
+   "pick": false,
+   "boat": false,
+   "url": "https://www.ruttgers.com/"
+  }
+ ],
+ "snow_links": [
+  {
+   "label": "Gull Lake snowmobile trail map",
+   "url": "https://www.brainerd.com/winter/snowmobile/trail-maps/gull-lake/"
+  },
+  {
+   "label": "Paul Bunyan Trail maps",
+   "url": "https://paulbunyantrail.com/trail-maps/"
+  },
+  {
+   "label": "Weekly trail conditions",
+   "url": "https://www.brainerd.com/winter/snowmobile/trail-conditions/"
+  }
+ ]
+}

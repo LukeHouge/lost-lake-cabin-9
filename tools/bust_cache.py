@@ -1,7 +1,7 @@
 """Stamp asset links in index.html with a content hash (?v=xxxxxxxx) so browsers
 fetch fresh CSS/JS after each update. Run before committing: python3 tools/bust_cache.py"""
-import hashlib, os, re
-ROOT = os.path.join(os.path.dirname(__file__), '..')
+import hashlib, os, re, sys
+ROOT = os.path.join(os.path.dirname(__file__), '..', *(sys.argv[1:2]))  # e.g. versions/v4
 page = os.path.join(ROOT, 'index.html')
 s = open(page).read()
 for asset in ['assets/css/site.css', 'assets/js/site.js']:
