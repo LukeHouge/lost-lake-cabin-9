@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cottage 9 · Design Versions</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,750&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font:16px/1.6 "Work Sans",system-ui,sans-serif;background:#fbf6ec;color:#1d2a2f}
+  .wrap{max-width:1100px;margin:0 auto;padding:56px 20px 80px}
+  h1{font:750 clamp(2rem,5vw,3rem)/1.1 Fraunces,Georgia,serif;color:#0f3b4f;margin:0 0 .4em}
+  .lede{color:#5b6b70;max-width:640px;margin:0 0 2.4rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+  a.card{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:#fff;border-radius:16px;overflow:hidden;border:1px solid rgba(15,59,79,.12);transition:transform .25s,box-shadow .25s}
+  a.card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -24px rgba(0,0,0,.4)}
+  .thumb{aspect-ratio:16/10;background-size:cover;background-position:center}
+  .body{padding:1.1rem 1.2rem 1.3rem}
+  h2{font:600 1.3rem Fraunces,Georgia,serif;margin:0 0 .3em;color:#0f3b4f}
+  .body p{margin:0;color:#5b6b70;font-size:.94rem}
+  .tag{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#e4572e;margin-bottom:.4rem}
+  .note{margin-top:2.4rem;color:#5b6b70;font-size:.92rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Cottage 9 website: pick a look</h1>
+  <p class="lede">Each card opens a full version of the site. The v2 site can switch its theme with the season automatically, or stay on one look all year. Pick a favorite, or note the pieces you like from each.</p>
+  <div class="grid">
+    <a class="card" href="../?season=summer">
+      <div class="thumb" style="background-image:url(../images/hero-summer.webp)"></div>
+      <div class="body"><span class="tag">v2 · Summer</span><h2>Lake Life</h2><p>Sunset over the docks with coral and deep-lake blue. Boating, wake surfing and bonfires.</p></div>
+    </a>
+    <a class="card" href="../?season=fall">
+      <div class="thumb" style="background-image:url(../images/hero-fall.webp)"></div>
+      <div class="body"><span class="tag">v2 · Fall</span><h2>Gold &amp; Ember</h2><p>Aerial fall color with burnt orange and bark brown. Color drives, grouse woods and fire pits.</p></div>
+    </a>
+    <a class="card" href="../?season=winter">
+      <div class="thumb" style="background-image:url(../images/hero-winter.webp);filter:saturate(.55) hue-rotate(-12deg)"></div>
+      <div class="body"><span class="tag">v2 · Winter</span><h2>Blue Hour</h2><p>Icy blues, warm amber buttons and falling snow. Ice fishing, sleds and skis. Still needs real winter photos.</p></div>
+    </a>
+    <a class="card" href="v1-original/">
+      <div class="thumb" style="background:linear-gradient(180deg,#1c3346,#c9775a 60%,#14252f)"></div>
+      <div class="body"><span class="tag">v1 · Original</span><h2>First Draft</h2><p>The first simple version, with an illustrated sunset and no photos yet. Kept for comparison.</p></div>
+    </a>
+  </div>
+  <p class="note">The live site picks its theme from the date: summer in May–August, fall in September–October, winter in November–April. Use the "Theme" pill in the corner of any v2 page to flip between looks.</p>
+</div>
+</body>
+</html>
