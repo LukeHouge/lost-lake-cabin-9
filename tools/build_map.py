@@ -66,7 +66,7 @@ def path(rings, eps=0.6):
         out.append("M" + "L".join(f"{x:.1f} {y:.1f}" for x, y in pts) + "Z")
     return "".join(out)
 
-CHAIN = {"Gull Lake", "Upper Gull Lake", "Lake Margaret", "Roy Lake", "Spider Lake", "Bass Lake", "Round Lake", "Nisswa Lake"}
+CHAIN = {"Gull Lake", "Upper Gull Lake", "Lake Margaret", "Roy Lake", "Spider Lake", "Bass Lake", "Nisswa Lake"}
 
 data = json.load(open(sys.argv[1]))
 chain, other, lost = [], [], []
