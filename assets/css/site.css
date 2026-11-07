@@ -673,3 +673,6 @@ html.motion .map-frame.drawn .map-route { opacity: 1; animation: sail 6s linear 
 .map-zoom { position: absolute; top: 24px; left: 24px; z-index: 2; display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(255,255,255,.92); box-shadow: 0 6px 18px -8px rgba(0,0,0,.35); }
 .map-zoom button { border: 0; background: transparent; padding: .45em .9em; border-radius: 999px; font: 600 .82rem var(--sans); color: var(--deep); cursor: pointer; }
 .map-zoom button[aria-pressed="true"] { background: var(--deep); color: #fff; }
+.map-tag-short { display: none; }
+.map-frame.zoomed .map-tag-full { display: none; }
+.map-frame.zoomed .map-tag-short { display: inline; }

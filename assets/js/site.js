@@ -226,6 +226,7 @@
   };
   zoomBtns.forEach((b) => b.addEventListener('click', () => {
     zoomBtns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    mapFrame.classList.toggle('zoomed', b !== zoomBtns[0]);
     setView(b.dataset.view);
   }));
   // tapping "Downtown Nisswa" in the legend zooms to the north end

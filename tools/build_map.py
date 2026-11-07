@@ -66,7 +66,7 @@ def path(rings, eps=0.6):
         out.append("M" + "L".join(f"{x:.1f} {y:.1f}" for x, y in pts) + "Z")
     return "".join(out)
 
-CHAIN = {"Gull Lake", "Upper Gull Lake", "Lake Margaret", "Roy Lake", "Spider Lake", "Bass Lake", "Round Lake"}
+CHAIN = {"Gull Lake", "Upper Gull Lake", "Lake Margaret", "Roy Lake", "Spider Lake", "Bass Lake", "Round Lake", "Nisswa Lake"}
 
 data = json.load(open(sys.argv[1]))
 chain, other, lost = [], [], []
@@ -121,7 +121,7 @@ POIS = [
     ("2", "Bar Harbor Supper Club", 46.5080, -94.3499),
     ("3", "Dock 77 at Quarterdeck", 46.4483, -94.3635),
     ("4", "Ernie's on Gull", 46.4230, -94.3608),
-    ("5", "Gull Point sandbar", 46.4195, -94.3530),
+    ("5", "Gull Point sandbar (approx.)", 46.4241, -94.3745),
     ("6", "Gull Lake Dam &amp; Rec Area", 46.4111, -94.3534),
     ("7", "Grand View Lodge golf", 46.4980, -94.3135),
     ("8", "Madden's · The Classic", 46.3960, -94.3740),
@@ -145,6 +145,7 @@ for label, lat, lon, size, cls in [
     ("Upper Gull", 46.528, -94.3575, 15, "map-label"),
     ("Lake Margaret", 46.4935, -94.381, 15, "map-label"),
     ("Roy Lake", 46.5108, -94.3205, 14, "map-label map-label-water"),
+    ("Nisswa Lake", 46.5162, -94.2985, 12, "map-label map-label-water"),
 ]:
     x, y = pt(lat, lon)
     svg.append(f'<text class="{cls}" x="{x}" y="{y}" text-anchor="middle" font-size="{size}">{label}</text>')
@@ -161,9 +162,14 @@ lx, ly = pt(46.5196, -94.3402)
 svg.append(f'<text class="map-label map-label-lost" x="{lx}" y="{ly}" font-size="12">Lost Lake</text>')
 svg.append(f'<g class="map-home"><circle class="map-home-pulse" cx="{hx}" cy="{hy}" r="20"/>'
            f'<circle cx="{hx}" cy="{hy}" r="11"/>'
-           f'<g transform="translate({int(hx) - 85} {int(hy) - 84})"><rect width="170" height="42" rx="21"/>'
+           # whole-lake view: full tag up and to the left
+           f'<g class="map-tag-full"><g transform="translate({int(hx) - 205} {int(hy) - 62})"><rect width="170" height="42" rx="21"/>'
            f'<text x="85" y="27" text-anchor="middle" font-size="18">Cottage 9 is here</text></g>'
-           f'<path d="M{int(hx)} {int(hy) - 42} L{int(hx)} {int(hy) - 13}" class="map-home-leader"/></g>')
+           f'<path d="M{int(hx) - 40} {int(hy) - 30} L{int(hx) - 14} {int(hy) - 8}" class="map-home-leader"/></g>'
+           # zoomed view: compact tag straight left, clear of the boat route
+           f'<g class="map-tag-short"><g transform="translate({int(hx) - 118} {int(hy) - 15})"><rect width="92" height="30" rx="15"/>'
+           f'<text x="46" y="20" text-anchor="middle" font-size="14">Cottage 9</text></g>'
+           f'<path d="M{int(hx) - 26} {int(hy)} L{int(hx) - 12} {int(hy)}" class="map-home-leader"/></g></g>')
 # Compass
 cx, cy = WIDTH - 60, HEIGHT - 70
 svg.append(f'<g class="map-compass" transform="translate({cx} {cy})"><path d="M0 -30 L9 0 L0 -6 L-9 0Z"/><text y="-38" text-anchor="middle" font-size="15">N</text></g>')
