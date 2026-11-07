@@ -53,6 +53,28 @@
     setTimeout(() => leafBox.replaceChildren(), 13000);
   };
 
+  const flurryBox = $('.flurry');
+  const dropSnow = () => {
+    if (!motion || !flurryBox) return;
+    flurryBox.replaceChildren();
+    for (let i = 0; i < 70; i++) {
+      const f = document.createElement('span');
+      f.className = 'flake';
+      const size = 3 + Math.random() * 8;
+      const st = f.style;
+      st.setProperty('--x', `${Math.random() * 100}%`);
+      st.setProperty('--s', `${size}px`);
+      st.setProperty('--b', `${size > 8 ? 1.2 : 0}px`);           // bigger = closer = softer
+      st.setProperty('--o', (0.55 + Math.random() * 0.45).toFixed(2));
+      st.setProperty('--dur', `${7 + Math.random() * 6}s`);
+      st.setProperty('--delay', `${Math.random() * 4}s`);
+      st.setProperty('--dx', `${(Math.random() - .5) * 120}px`);
+      flurryBox.appendChild(f);
+    }
+    setTimeout(() => flurryBox.replaceChildren(), 17000);
+  };
+  const setFavicon = (season) => { const fav = $('#favicon'); if (fav) fav.href = `assets/img/logo-${season}.svg`; };
+
   const btns = $$('[data-season-btn]');
   const mark = (choice) => btns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.seasonBtn === choice)));
   let saved = null;
@@ -67,12 +89,14 @@
     history.replaceState(null, '', url);
     mark(choice);
     if (season === root.dataset.season) return;
-    const apply = () => { root.dataset.season = season; updateDay(); };
+    const apply = () => { root.dataset.season = season; setFavicon(season); updateDay(); };
     if (motion && document.startViewTransition) document.startViewTransition(apply);
     else apply();
     if (season === 'fall') setTimeout(dropLeaves, 400);
+    if (season === 'winter') setTimeout(dropSnow, 400);
   }));
   if (root.dataset.season === 'fall') setTimeout(dropLeaves, root.classList.contains('intro') ? 1800 : 300);
+  if (root.dataset.season === 'winter') setTimeout(dropSnow, root.classList.contains('intro') ? 1800 : 300);
 
   // ----- lightbox -----
   const dlg = $('.lightbox');

@@ -139,11 +139,10 @@ button { font: inherit; }
 .site-header.scrolled { background: color-mix(in srgb, var(--paper) 94%, transparent); backdrop-filter: blur(12px) saturate(1.3); color: var(--ink); box-shadow: 0 1px 0 var(--line); }
 .header-inner { display: flex; align-items: center; justify-content: space-between; min-height: 72px; gap: 1rem; }
 .brand { display: flex; align-items: center; gap: .75rem; color: inherit; text-decoration: none; }
-.brand-badge {
-  display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%;
-  background: var(--accent); color: #fff; font: 800 1.35rem var(--serif);
-  box-shadow: inset 0 0 0 3px rgba(255,255,255,.35);
-}
+.brand-badge { display: block; width: 54px; height: 54px; flex: none; margin: -6px -4px -6px -6px; }
+.brand-badge .logo { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
+.brand:hover .brand-badge .logo { transform: rotate(-6deg); }
+.brand-badge .logo { transition: transform .4s cubic-bezier(.3, 1.6, .5, 1); }
 .brand-text { font: 700 1.2rem/1.05 var(--serif); }
 .brand-text small { display: block; font: 500 .72rem var(--sans); letter-spacing: .06em; opacity: .8; margin-top: 3px; }
 .site-nav { display: flex; align-items: center; gap: 1.6rem; }
@@ -606,4 +605,19 @@ html.motion .bonfire .flame { animation: flicker .9s ease-in-out infinite altern
   .house-wrap { padding-right: 96px; }
   .brackets { width: 86px; }
   .floor-btn { height: 96px; padding: .7rem .9rem; }
+}
+
+/* ---------- winter flurry (one-time, like the fall leaves) ---------- */
+.flurry { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.flake { position: absolute; top: -20px; left: var(--x); width: var(--s); height: var(--s); border-radius: 50%;
+  background: radial-gradient(circle, #fff 0 45%, rgba(255,255,255,.6) 60%, transparent 72%); filter: blur(var(--b)); opacity: 0;
+  animation: flakeFall var(--dur) var(--delay) linear forwards; }
+@keyframes flakeFall {
+  0% { opacity: 0; transform: translate(0, 0); }
+  10% { opacity: var(--o); }
+  25% { transform: translate(calc(var(--dx) * .25 + 12px), 25vh); }
+  50% { transform: translate(calc(var(--dx) * .5 - 10px), 52vh); }
+  75% { transform: translate(calc(var(--dx) * .75 + 12px), 78vh); }
+  92% { opacity: var(--o); }
+  100% { opacity: 0; transform: translate(var(--dx), 104vh); }
 }
