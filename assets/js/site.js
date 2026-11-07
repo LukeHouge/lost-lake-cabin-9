@@ -177,72 +177,106 @@
     });
   });
 
-  // ----- 2. map: draw on scroll + legend <-> marker highlighting -----
+  // ----- 2. multi-view area map: tabs, zoom tween, layers, legend <-> marker -----
   const mapFrame = $('.map-frame');
-  if (mapFrame) {
-    if (motion) {
-      onceVisible(mapFrame, () => {
-        mapFrame.classList.add('drawn');
-        setTimeout(() => mapFrame.classList.add('settled'), 4200);
-      }, '0px 0px -25% 0px');
-    } else {
-      mapFrame.classList.add('drawn', 'settled');
-    }
-    const legend = $$('.map-legend li[data-poi]');
-    const pois = $$('.map-poi[data-poi], .map-launch[data-poi]', mapFrame);
-    const hot = (n) => {
-      legend.forEach((li) => li.classList.toggle('hot', li.dataset.poi === n));
-      pois.forEach((g) => g.classList.toggle('hot', g.dataset.poi === n));
+  const holder = $('.map-holder');
+  if (mapFrame && holder) {
+    const VIEWS = JSON.parse(holder.dataset.views);
+    const tabs = $$('[data-map-view]');
+    const subBtns = $$('.map-zoom [data-sub]');
+    let svg = null, cur = 'boating', anim = 0;
+    const BASE = 810; // viewBox width at which markers render at their natural size
+    const parse = (v) => v.split(/\s+/).map(Number);
+    const apply = (vb) => {
+      svg.setAttribute('viewBox', vb.map((n) => n.toFixed(1)).join(' '));
+      svg.style.setProperty('--k', (vb[2] / BASE).toFixed(4));
     };
-    const cool = () => hot(null);
-    [...legend, ...pois].forEach((el) => {
-      el.addEventListener('mouseenter', () => hot(el.dataset.poi));
-      el.addEventListener('mouseleave', cool);
-      el.addEventListener('focus', () => hot(el.dataset.poi));
-      el.addEventListener('blur', cool);
-      el.addEventListener('click', () => hot(el.dataset.poi));
+    const goTo = (view) => {
+      if (!svg) { cur = view; return; }
+      const from = parse(svg.getAttribute('viewBox')), to = parse(VIEWS[view]);
+      svg.dataset.view = view;
+      mapFrame.dataset.view = view;
+      cancelAnimationFrame(anim);
+      if (!motion) { apply(to); return; }
+      const t0 = performance.now(), dur = 1100;
+      const step = (now) => {
+        const k = Math.min(1, (now - t0) / dur);
+        const e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+        // zoom out a little mid-flight for a "flyover" feel when the scale changes a lot
+        apply(from.map((f, i) => f + (to[i] - f) * e));
+        if (k < 1) anim = requestAnimationFrame(step);
+      };
+      anim = requestAnimationFrame(step);
+      setTimeout(() => apply(to), dur + 120);
+      cur = view;
+    };
+    const selectTab = (k, focus) => {
+      tabs.forEach((t) => {
+        const on = t.dataset.mapView === k;
+        t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+        $('#mv-' + t.dataset.mapView).hidden = !on;
+        if (on && focus) t.focus();
+      });
+      subBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.sub === 'boating')));
+      goTo(k);
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => selectTab(t.dataset.mapView));
+      t.addEventListener('keydown', (e) => {
+        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { e.preventDefault(); selectTab(tabs[(i + d + tabs.length) % tabs.length].dataset.mapView, true); }
+      });
     });
-  }
+    subBtns.forEach((b) => b.addEventListener('click', () => {
+      subBtns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      goTo(b.dataset.sub);
+    }));
 
-  // ----- map zoom: whole lake <-> north end (tweens the SVG viewBox) -----
-  const mapSvg = $('.lake-map');
-  const zoomBtns = $$('.map-zoom [data-view]');
-  let zoomAnim = 0;
-  const setView = (target) => {
-    const from = mapSvg.getAttribute('viewBox').split(/\s+/).map(Number);
-    const to = target.split(/\s+/).map(Number);
-    cancelAnimationFrame(zoomAnim);
-    if (!motion) { mapSvg.setAttribute('viewBox', target); return; }
-    const t0 = performance.now(), dur = 900;
-    const step = (now) => {
-      const k = Math.min(1, (now - t0) / dur);
-      const e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
-      mapSvg.setAttribute('viewBox', from.map((f, i) => (f + (to[i] - f) * e).toFixed(1)).join(' '));
-      if (k < 1) zoomAnim = requestAnimationFrame(step);
-      else mapSvg.setAttribute('viewBox', target);
+    // legend <-> marker highlighting, and auto-zoom for off-screen spots in the boating close-up
+    const hot = (id) => {
+      $$('.map-legend li[data-poi]').forEach((li) => li.classList.toggle('hot', li.dataset.poi === id));
+      if (svg) $$('[data-poi]', svg).forEach((g) => g.classList.toggle('hot', g.dataset.poi === id));
     };
-    zoomAnim = requestAnimationFrame(step);
-    setTimeout(() => mapSvg.setAttribute('viewBox', target), dur + 100);
-  };
-  zoomBtns.forEach((b) => b.addEventListener('click', () => {
-    zoomBtns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-    mapFrame.classList.toggle('zoomed', b !== zoomBtns[0]);
-    setView(b.dataset.view);
-  }));
-  // legend taps: "Downtown Nisswa" (data-zoom="north") zooms to the north end; any spot that's
-  // outside the current view (e.g. the sandbar) zooms back out to the whole lake
-  const inView = (poi) => {
-    const c = $(`.map-poi[data-poi="${poi}"] circle`, mapFrame);
-    const btn = zoomBtns.find((b) => b.getAttribute('aria-pressed') === 'true');
-    if (!c || !btn) return true;
-    const [x, y, w, h] = btn.dataset.view.split(/\s+/).map(Number);
-    const cx = +c.getAttribute('cx'), cy = +c.getAttribute('cy');
-    return cx > x + 15 && cx < x + w - 15 && cy > y + 15 && cy < y + h - 15;
-  };
-  $$('.map-legend li[data-poi]').forEach((li) => li.addEventListener('click', () => {
-    if (li.dataset.zoom === 'north') { if (zoomBtns[1].getAttribute('aria-pressed') !== 'true') zoomBtns[1].click(); }
-    else if (!inView(li.dataset.poi)) zoomBtns[0].click();
-  }));
+    const inView = (id) => {
+      const g = svg && $(`[data-poi="${id}"]`, svg);
+      if (!g) return true;
+      const m = /translate\(([\d.]+)px,\s*([\d.]+)px\)/.exec(g.getAttribute('style') || '');
+      if (!m) return true;
+      const [x, y, w, h] = parse(svg.getAttribute('viewBox'));
+      const px = +m[1], py = +m[2], pad = w * .04;
+      return px > x + pad && px < x + w - pad && py > y + pad && py < y + h - pad;
+    };
+    $$('.map-legend li[data-poi]').forEach((li) => {
+      li.addEventListener('mouseenter', () => hot(li.dataset.poi));
+      li.addEventListener('mouseleave', () => hot(null));
+      li.addEventListener('focus', () => hot(li.dataset.poi));
+      li.addEventListener('blur', () => hot(null));
+      li.addEventListener('click', () => {
+        hot(li.dataset.poi);
+        if (li.dataset.zoom === 'north' && cur !== 'north') subBtns[1]?.click();
+        else if (cur === 'north' && !inView(li.dataset.poi)) subBtns[0]?.click();
+      });
+    });
+
+    // lazy-load the map SVG when the section gets close
+    const load = () => fetch(holder.dataset.src).then((r) => r.text()).then((txt) => {
+      holder.innerHTML = txt;
+      svg = $('svg', holder);
+      svg.dataset.view = cur;
+      mapFrame.dataset.view = cur;
+      apply(parse(VIEWS[cur]));
+      $$('[data-poi]', svg).forEach((g) => {
+        g.addEventListener('mouseenter', () => hot(g.dataset.poi));
+        g.addEventListener('mouseleave', () => hot(null));
+        g.addEventListener('click', () => {
+          const li = $(`.map-legend li[data-poi="${g.dataset.poi}"]`);
+          if (li) { hot(g.dataset.poi); li.scrollIntoView({ block: 'nearest', behavior: motion ? 'smooth' : 'auto' }); }
+        });
+      });
+      requestAnimationFrame(() => mapFrame.classList.add('drawn'));
+    }).catch(() => { holder.innerHTML = '<p class="map-loading">The map could not load. Please refresh.</p>'; });
+    onceVisible(mapFrame, load, '0px 0px 600px 0px');
+  }
 
   // ----- 3. day-to-dusk timeline driven by scroll -----
   const day = $('#day');

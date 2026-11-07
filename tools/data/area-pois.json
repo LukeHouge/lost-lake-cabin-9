@@ -1,0 +1,142 @@
+{
+ "boating": [
+  {
+   "num": "1",
+   "name": "Zorbaz on Gull",
+   "lat": 46.511,
+   "lon": -94.3442,
+   "desc": "just down the road, or by boat",
+   "boat": true
+  },
+  {
+   "num": "2",
+   "name": "Bar Harbor Supper Club",
+   "lat": 46.508,
+   "lon": -94.3499,
+   "desc": "built over the water in 1937",
+   "boat": true
+  },
+  {
+   "num": "3",
+   "name": "Downtown Nisswa, by boat!",
+   "lat": 46.5193,
+   "lon": -94.2907,
+   "desc": "public docks at Nisswa Lake Park, then a tunnel under Hwy 371 straight to Main Street: Rafferty's Pizza, Big Axe Brewing, shops",
+   "boat": true,
+   "zoom": "north",
+   "star": true
+  },
+  {
+   "num": "4",
+   "name": "Grand View Lodge",
+   "lat": 46.4931,
+   "lon": -94.3157,
+   "desc": "public docks, beachside cantina, golf: The Pines & The Preserve",
+   "boat": true
+  },
+  {
+   "num": "5",
+   "name": "Hole-in-the-Day Bay",
+   "lat": 46.477,
+   "lon": -94.305,
+   "desc": "the bay of Gull Lake where the Ice Fishing Extravaganza is held every February",
+   "boat": false
+  },
+  {
+   "num": "6",
+   "name": "Dock 77 at Quarterdeck",
+   "lat": 46.4483,
+   "lon": -94.3635,
+   "desc": "open year-round",
+   "boat": true
+  },
+  {
+   "num": "7",
+   "name": "Ernie's on Gull",
+   "lat": 46.423,
+   "lon": -94.3608,
+   "desc": "full marina, deck, live music",
+   "boat": true
+  },
+  {
+   "num": "8",
+   "name": "Gull Point sandbar",
+   "lat": 46.4241,
+   "lon": -94.3745,
+   "desc": "the summer hangout, off the tip of Gull Point",
+   "boat": false
+  },
+  {
+   "num": "9",
+   "name": "Gull Lake Dam & Rec Area",
+   "lat": 46.4111,
+   "lon": -94.3534,
+   "desc": "beach, history, picnics",
+   "boat": false
+  },
+  {
+   "num": "10",
+   "name": "Madden's",
+   "lat": 46.396,
+   "lon": -94.374,
+   "desc": "Parfecto Pizza by boat, beach bay, The Classic golf course",
+   "boat": true
+  },
+  {
+   "num": "11",
+   "name": "Cragun's",
+   "lat": 46.3907,
+   "lon": -94.3701,
+   "desc": "Gull Lake Cruises depart here, Legacy golf. Call the marina about docking.",
+   "boat": false
+  }
+ ],
+ "todo": [
+  {
+   "name": "Fritz Loven Park",
+   "desc": "wooded trails and a quiet spot on the water, right next door",
+   "lat": 46.51619,
+   "lon": -94.35397
+  },
+  {
+   "name": "Downtown Nisswa",
+   "desc": "shops, treats and the Wednesday turtle races (summer)",
+   "lat": 46.5205,
+   "lon": -94.2886
+  },
+  {
+   "name": "Mount Ski Gull",
+   "desc": "downhill skiing and tubing on the west side of Gull Lake",
+   "lat": 46.44485,
+   "lon": -94.37851
+  },
+  {
+   "name": "Brainerd International Raceway",
+   "desc": "drag racing, road racing and track days; watch a race or bring your own car",
+   "lat": 46.41608,
+   "lon": -94.27115
+  },
+  {
+   "name": "Northland Arboretum",
+   "desc": "groomed cross-country ski and walking trails in Baxter",
+   "lat": 46.36926,
+   "lon": -94.22966
+  },
+  {
+   "name": "Crow Wing State Park",
+   "desc": "history and trails where the Crow Wing meets the Mississippi",
+   "lat": 46.27807,
+   "lon": -94.33425
+  },
+  {
+   "name": "Cuyuna Country State Recreation Area",
+   "desc": "nationally known mountain-bike trails and clear mine-pit lakes",
+   "lat": 46.49033,
+   "lon": -94.00706
+  }
+ ],
+ "biking": [],
+ "snow": [],
+ "eat": [],
+ "golf": []
+}
