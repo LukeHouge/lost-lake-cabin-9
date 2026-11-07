@@ -116,8 +116,8 @@ svg = [f'<svg class="lake-map" viewBox="0 0 {WIDTH} {HEIGHT}" style="overflow:hi
        f'<rect class="map-land" width="{WIDTH}" height="{HEIGHT}"/>',
        '<g clip-path="url(#map-clip)">',
        f'<g class="map-other">' + "".join(f'<path d="{d}"/>' for d in other) + '</g>',
-       f'<g class="map-chain">' + "".join(f'<path d="{d}"/>' for d in chain) + '</g>',
-       f'<g class="map-lost">' + "".join(f'<path d="{d}"/>' for d in lost) + '</g>', '</g>']
+       f'<g class="map-chain">' + "".join(f'<path pathLength="1" d="{d}"/>' for d in chain) + '</g>',
+       f'<g class="map-lost">' + "".join(f'<path pathLength="1" d="{d}"/>' for d in lost) + '</g>', '</g>']
 
 # Lake labels
 for label, lat, lon, size, cls in [
@@ -133,7 +133,7 @@ svg.append(f'<g class="map-town"><circle cx="{nx}" cy="{ny}" r="6"/><text x="{in
 
 for num, name, lat, lon in POIS:
     x, y = pt(lat, lon)
-    svg.append(f'<g class="map-poi"><title>{name}</title><circle cx="{x}" cy="{y}" r="13"/><text x="{x}" y="{int(y) + 5}" text-anchor="middle" font-size="15">{num}</text></g>')
+    svg.append(f'<g class="map-poi" data-poi="{num}" style="--i:{num}"><title>{name}</title><circle cx="{x}" cy="{y}" r="13"/><text x="{x}" y="{int(y) + 5}" text-anchor="middle" font-size="15">{num}</text></g>')
 
 lx, ly = pt(46.5205, -94.3405)
 svg.append(f'<text class="map-label map-label-lost" x="{int(lx) + 14}" y="{ly}" font-size="14">Lost Lake</text>')

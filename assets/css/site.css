@@ -80,6 +80,7 @@ html[data-season="winter"] [data-only]:not([data-only~="winter"]) { display: non
 
 /* ---------- base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; scroll-padding-top: 76px; }
 body {
   margin: 0; background: var(--paper); color: var(--ink);
@@ -462,4 +463,147 @@ details p { margin: .8rem 0 0; color: var(--muted); }
   html { scroll-behavior: auto; }
   .hero-bg, .ticker-track, .snow, .map-home-pulse { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* =========================================================
+   MOTION & INTERACTION (v3)
+   Everything animated is gated behind html.motion, which is only
+   set when the visitor hasn't asked for reduced motion.
+   ========================================================= */
+
+/* ---------- day-to-dusk sky colors per season ---------- */
+:root { --sky1: #2c6f8a; --sky2: #1f5f80; --sky3: #b5532f; --sky4: #5a2f55; --sky5: #0d1f33; }
+html[data-season="fall"] { --sky1: #56663f; --sky2: #4a5232; --sky3: #9a4a17; --sky4: #4b2a1c; --sky5: #17150f; }
+html[data-season="winter"] { --sky1: #3d6283; --sky2: #2c4d6d; --sky3: #7a4f72; --sky4: #2a2f55; --sky5: #0b1626; }
+
+/* ---------- 1. sunrise intro (first visit per session) ---------- */
+.hero .line { display: block; overflow: hidden; padding-bottom: .14em; margin-bottom: -.14em; }
+.hero .line > span { display: inline-block; }
+html.intro .hero-bg { animation: sunrise 2.2s var(--ease) backwards, drift 24s 2.2s var(--ease) infinite alternate; }
+@keyframes sunrise { from { opacity: 0; filter: blur(16px) brightness(1.6) sepia(.55) saturate(1.5); transform: scale(1.18); } }
+html.intro .hero .line > span { animation: rise 1.1s var(--ease) backwards; }
+html.intro .hero .line:nth-child(1) > span { animation-delay: .55s; }
+html.intro .hero .line:nth-child(2) > span { animation-delay: .8s; }
+@keyframes rise { from { transform: translateY(110%); } }
+html.intro .kicker { animation: fadeUp .9s .35s var(--ease) backwards; }
+html.intro .hero-lede { animation: fadeUp .9s 1.15s var(--ease) backwards; }
+html.intro .hero-ctas { animation: fadeUp .9s 1.35s var(--ease) backwards; }
+html.intro .stamp { animation: stampIn .9s 1.7s var(--ease) backwards; }
+html.intro .ticker, html.intro .site-header { animation: fadeIn 1s 1.5s ease backwards; }
+html.intro .site-header { animation-delay: .2s; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } }
+@keyframes fadeIn { from { opacity: 0; } }
+@keyframes stampIn { from { opacity: 0; transform: rotate(-30deg) scale(1.4); } }
+
+/* ---------- 2. the map draws itself ---------- */
+html.motion .map-chain path, html.motion .map-lost path {
+  stroke: var(--deep); stroke-width: 1.6; stroke-linejoin: round;
+  stroke-dasharray: 1; stroke-dashoffset: 1; fill-opacity: 0;
+  transition: stroke-dashoffset 2.8s cubic-bezier(.45, 0, .2, 1), fill-opacity 1.2s 1.9s ease;
+}
+html.motion .map-other path { opacity: 0; transition: opacity 1.4s .5s ease; }
+html.motion .map-label, html.motion .map-label-big, html.motion .map-town, html.motion .map-compass { opacity: 0; transition: opacity 1s 2s ease; }
+html.motion .map-poi { opacity: 0; transform: translateY(-16px) scale(.5); transform-box: fill-box; transform-origin: center; transition: opacity .45s, transform .55s cubic-bezier(.3, 1.6, .5, 1); transition-delay: calc(2.1s + var(--i) * .13s); }
+html.motion .map-home { opacity: 0; transform: scale(.6); transform-box: fill-box; transform-origin: center; transition: opacity .5s 3.3s, transform .7s 3.3s cubic-bezier(.3, 1.6, .5, 1); }
+html.motion .map-frame.drawn .map-chain path, html.motion .map-frame.drawn .map-lost path { stroke-dashoffset: 0; fill-opacity: 1; }
+html.motion .map-frame.drawn :is(.map-other path, .map-label, .map-label-big, .map-town, .map-compass, .map-poi, .map-home) { opacity: 1; transform: none; }
+.map-frame.settled .map-poi { transition-delay: 0s; }
+.map-poi { cursor: pointer; transform-box: fill-box; transform-origin: center; transition: transform .3s cubic-bezier(.3, 1.6, .5, 1); }
+.map-frame .map-poi.hot { transform: scale(1.45); }
+.map-poi.hot circle { fill: var(--deep); stroke: var(--glow); }
+.map-legend li { cursor: pointer; border-radius: 10px; padding: .15rem .5rem; margin-left: -.5rem; transition: background .25s; outline-offset: 2px; }
+.map-legend li.hot { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.map-legend li.hot b { background: var(--deep); }
+
+/* ---------- 3. day-to-dusk timeline ---------- */
+.day { --p: 0; }
+html.motion .day { background-image: linear-gradient(180deg, var(--sky1), var(--sky2) 25%, var(--sky3) 50%, var(--sky4) 75%, var(--sky5)); background-size: 100% 500%; background-position: 0 calc(var(--p) * 100%); }
+.day-track { display: none; }
+html.motion .day-track { display: block; position: relative; height: 0; z-index: 2; }
+.traveler {
+  position: absolute; top: 9px; left: calc(var(--p) * 94%); width: 26px; height: 26px; border-radius: 50%;
+  background: radial-gradient(circle, #fff6d6 30%, var(--glow) 70%); box-shadow: 0 0 24px 8px color-mix(in srgb, var(--glow) 55%, transparent);
+  transition: background .6s, box-shadow .6s;
+}
+.day.night .traveler { background: transparent; box-shadow: inset -8px 3px 0 0 #f3efe2, 0 0 18px 2px rgba(243, 239, 226, .25); }
+html[data-season="winter"] .traveler::after { content: "❄"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--deep); font-size: 15px; }
+html[data-season="winter"] .day.night .traveler::after { content: none; }
+html.motion .timeline li { opacity: .45; transition: opacity .5s; }
+html.motion .timeline li.past { opacity: .7; }
+html.motion .timeline li.active { opacity: 1; }
+html.motion .timeline li::before { transition: transform .4s, box-shadow .4s; }
+html.motion .timeline li.active::before { transform: scale(1.25); box-shadow: 0 0 0 8px color-mix(in srgb, var(--glow) 35%, transparent); }
+html.motion .timeline li[data-step]::before { opacity: 0; }
+html.motion .timeline li.past::before, html.motion .timeline li.active::before { opacity: 1; }
+/* 10. bonfire flicker (bonus) */
+.flame { display: inline-block; width: .55em; height: .75em; margin-left: .25em; vertical-align: -.05em; border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+  background: radial-gradient(ellipse at 50% 85%, #fff2b0 0 18%, #ffb347 40%, #ff6b2b 65%, transparent 72%); opacity: 0; transition: opacity .4s; transform-origin: 50% 100%; }
+.bonfire:hover .flame, .bonfire.active .flame { opacity: 1; }
+html.motion .bonfire .flame { animation: flicker .9s ease-in-out infinite alternate; }
+@keyframes flicker { 0% { transform: scale(1, 1) skewX(0); } 33% { transform: scale(.92, 1.08) skewX(3deg); } 66% { transform: scale(1.05, .95) skewX(-3deg); } 100% { transform: scale(.96, 1.1) skewX(2deg); } }
+
+/* ---------- 4. season switch: crossfade + fall leaves ---------- */
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .8s; animation-timing-function: ease; }
+.leaves { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.leaf { position: absolute; top: -30px; left: var(--x); width: var(--s); height: var(--s); background: var(--c); border-radius: 0 75% 0 75%; opacity: 0;
+  animation: leafFall var(--dur) var(--delay) cubic-bezier(.4, .1, .6, 1) forwards; }
+@keyframes leafFall {
+  0% { opacity: 0; transform: translate(0, 0) rotate(0); }
+  8% { opacity: .95; }
+  50% { transform: translate(calc(var(--dx) * .6), 55vh) rotate(calc(var(--rot) * .5)); }
+  90% { opacity: .9; }
+  100% { opacity: 0; transform: translate(var(--dx), 105vh) rotate(var(--rot)); }
+}
+
+/* ---------- 9. floor explorer ---------- */
+.explorer { display: grid; grid-template-columns: minmax(300px, 380px) 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+.house-wrap { position: relative; padding-right: 112px; }
+.house { display: flex; flex-direction: column; filter: drop-shadow(0 22px 28px rgba(0,0,0,.16)); }
+.roof { height: 86px; margin: 0 -16px; background: var(--deep); clip-path: polygon(50% 0, 100% 100%, 0 100%); display: grid; place-items: end center; padding-bottom: 12px;
+  color: rgba(255,255,255,.7); font: 700 .66rem var(--sans); letter-spacing: .2em; text-transform: uppercase; }
+.floor-btn { height: 96px; display: flex; flex-direction: column; justify-content: center; gap: 3px; text-align: left; cursor: pointer;
+  border: 0; border-left: 6px solid transparent; border-bottom: 1px solid var(--line); background: var(--card); padding: .8rem 1.1rem;
+  transition: background .35s var(--ease), border-color .35s; }
+.floor-btn b { font: 700 1.3rem/1.1 var(--serif); color: var(--deep); transition: color .3s; }
+.floor-btn small { color: var(--muted); font-size: .82rem; line-height: 1.35; transition: color .3s; }
+.floor-btn:hover { background: color-mix(in srgb, var(--accent) 9%, var(--card)); }
+.floor-btn:focus-visible { outline: 3px solid var(--glow); outline-offset: -3px; }
+.floor-btn[aria-selected="true"] { background: var(--accent); border-left-color: var(--accent-dark); }
+.floor-btn[aria-selected="true"] b, .floor-btn[aria-selected="true"] small { color: #fff; }
+.floor-lower { background: color-mix(in srgb, var(--sand) 70%, #b89c74); border-bottom: 0; }
+.ground { position: relative; height: 0; border-top: 4px solid #6f9150; margin: 0 -16px; z-index: 1; }
+.ground span { position: absolute; left: 100%; top: -9px; margin-left: 6px; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); white-space: nowrap; display: none; }
+.brackets { position: absolute; top: 86px; right: 0; width: 98px; }
+.bracket { position: absolute; left: 0; right: 0; display: flex; flex-direction: column; justify-content: center; padding-left: 12px;
+  border: 2px solid var(--accent); border-left: 0; border-radius: 0 10px 10px 0; font-size: .78rem; color: var(--muted); line-height: 1.3; }
+.bracket b { display: block; font: 700 .95rem/1.15 var(--serif); color: var(--deep); }
+.b-main { top: 4px; height: 184px; }
+.b-lower { top: 200px; height: 88px; }
+.explorer-hint { margin-top: 1.4rem; font-size: 1.35rem; }
+.level-panel { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.6rem; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; }
+.level-panel.enter { animation: panelIn .55s var(--ease); }
+@keyframes panelIn { from { opacity: 0; transform: translateY(14px); } }
+.lp-hero { display: block; width: 100%; border: 0; padding: 0; border-radius: 12px; overflow: hidden; aspect-ratio: 3 / 2; cursor: zoom-in; background: var(--sand); }
+.lp-hero img, .lp-thumbs img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+.lp-hero:hover img, .lp-thumbs button:hover img { transform: scale(1.05); }
+.lp-thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px; }
+.lp-thumbs button { border: 0; padding: 0; border-radius: 8px; overflow: hidden; aspect-ratio: 1; cursor: zoom-in; background: var(--sand); }
+.lp-body { padding: .8rem .8rem .8rem 0; }
+.lp-body ul { list-style: none; padding: 0; margin: 0; }
+.lp-body li { position: relative; padding-left: 1.5rem; margin-bottom: .5rem; font-size: .97rem; }
+.lp-body li::before { content: ""; position: absolute; left: 0; top: .55em; width: 9px; height: 9px; border-radius: 50%; border: 2px solid var(--accent); }
+
+@media (max-width: 1060px) {
+  .explorer { grid-template-columns: 1fr; }
+  .house-wrap { max-width: 460px; width: 100%; margin-inline: auto; }
+  .explorer-hint { text-align: center; display: block; }
+  html.motion .day-track { display: none; }
+  html.motion .timeline li[data-step]::before { opacity: 1; }
+}
+@media (max-width: 640px) {
+  .level-panel { grid-template-columns: 1fr; }
+  .lp-body { padding: 0 .4rem .4rem; }
+  .house-wrap { padding-right: 96px; }
+  .brackets { width: 86px; }
+  .floor-btn { height: 96px; padding: .7rem .9rem; }
 }
