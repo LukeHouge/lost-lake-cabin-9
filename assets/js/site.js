@@ -189,7 +189,7 @@
       mapFrame.classList.add('drawn', 'settled');
     }
     const legend = $$('.map-legend li[data-poi]');
-    const pois = $$('.map-poi[data-poi]', mapFrame);
+    const pois = $$('.map-poi[data-poi], .map-launch[data-poi]', mapFrame);
     const hot = (n) => {
       legend.forEach((li) => li.classList.toggle('hot', li.dataset.poi === n));
       pois.forEach((g) => g.classList.toggle('hot', g.dataset.poi === n));

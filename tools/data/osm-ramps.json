@@ -1,0 +1,142 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-11-07T22:26:51Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 3643127963,
+  "lat": 46.4710135,
+  "lon": -94.2960419,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 6260646286,
+  "lat": 46.4123650,
+  "lon": -94.3603163,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 8241121275,
+  "lat": 46.5099116,
+  "lon": -94.3439385,
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "leisure": "slipway",
+    "name": "Gull Lake Narrows Landing",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 8635896050,
+  "lat": 46.4486646,
+  "lon": -94.3629429,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 12840628863,
+  "lat": 46.4382628,
+  "lon": -94.3259141,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 12840631011,
+  "lat": 46.3745148,
+  "lon": -94.3723972,
+  "tags": {
+    "leisure": "slipway",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 12840665140,
+  "lat": 46.4389393,
+  "lon": -94.3222360,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 12851228920,
+  "lat": 46.3810437,
+  "lon": -94.2860643,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 12945119545,
+  "lat": 46.3994391,
+  "lon": -94.3730429,
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "leisure": "slipway",
+    "name": "Madden's On Gull Lake Boat Launch",
+    "surface": "concrete",
+    "width": "4"
+  }
+},
+{
+  "type": "way",
+  "id": 207512134,
+  "center": {
+    "lat": 46.4123422,
+    "lon": -94.3601728
+  },
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 931477315,
+  "center": {
+    "lat": 46.4486939,
+    "lon": -94.3630985
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1349324185,
+  "center": {
+    "lat": 46.5183106,
+    "lon": -94.2905531
+  },
+  "tags": {
+    "access": "yes",
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway",
+    "surface": "paved"
+  }
+}
+
+  ]
+}

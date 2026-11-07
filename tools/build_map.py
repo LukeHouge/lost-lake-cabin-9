@@ -104,6 +104,21 @@ def smooth_open(pts):
         out.append(f'C{c1[0]:.1f} {c1[1]:.1f} {c2[0]:.1f} {c2[1]:.1f} {p2[0]:.1f} {p2[1]:.1f}')
     return ''.join(out)
 
+TRAILS = []   # bike paths: Gull Lake Trail + Paul Bunyan Trail (+ unnamed cycleways near the north end)
+_tp = os.path.join(os.path.dirname(__file__), 'data', 'osm-trails.json')
+if os.path.exists(_tp):
+    for e in json.load(open(_tp))['elements']:
+        t = e.get('tags', {}); name = t.get('name') or ''
+        g = e.get('geometry') or []
+        if t.get('highway') != 'cycleway' or len(g) < 2:
+            continue
+        if not (name.startswith('Gull Lake Trail') or name.startswith('Paul Bunyan') or not name):
+            continue
+        pts = rdp([xy(p['lat'], p['lon']) for p in g], 0.8)
+        TRAILS.append('M' + 'L'.join(f'{x:.1f} {y:.1f}' for x, y in pts))
+
+LAUNCH = (46.50991, -94.34394)  # OSM: "Gull Lake Narrows Landing", public access, next to Zorbaz
+
 ROUTE = None
 _rp = os.path.join(os.path.dirname(__file__), 'data', 'route-raw.json')
 if os.path.exists(_rp):
@@ -153,6 +168,10 @@ for label, lat, lon, size, cls in [
     svg.append(f'<text class="{cls}" x="{x}" y="{y}" text-anchor="middle" font-size="{size}">{label}</text>')
 nx, ny = pt(46.5205, -94.2886)
 svg.append(f'<g class="map-town"><text x="{int(nx) - 2}" y="{int(ny) - 22}" text-anchor="middle" font-size="17">Nisswa</text></g>')
+if TRAILS:
+    svg.append('<g class="map-trail">' + ''.join(f'<path d="{d}"/>' for d in TRAILS) + '</g>')
+    px_, py_ = pt(46.5262, -94.2855)
+    svg.append(f'<text class="map-label map-label-trail" x="{px_}" y="{py_}" font-size="11" text-anchor="middle">Paul Bunyan Trail</text>')
 if ROUTE:
     svg.append(f'<path class="map-route" pathLength="1" d="{ROUTE}"/>')
 
@@ -172,6 +191,11 @@ svg.append(f'<g class="map-home"><circle class="map-home-pulse" cx="{hx}" cy="{h
            f'<g class="map-tag-short" display="none"><g transform="translate({int(hx) - 118} {int(hy) - 15})"><rect width="92" height="30" rx="15"/>'
            f'<text x="46" y="20" text-anchor="middle" font-size="14">Cottage 9</text></g>'
            f'<path d="M{int(hx) - 26} {int(hy)} L{int(hx) - 12} {int(hy)}" class="map-home-leader"/></g></g>')
+lx_, ly_ = pt(*LAUNCH)
+svg.append(f'<g class="map-launch" data-poi="L" style="--i:0"><title>Gull Lake Narrows Landing: public boat launch</title>'
+           f'<line x1="{lx_}" y1="{ly_}" x2="{int(lx_) + 24}" y2="{int(ly_) + 10}"/>'
+           f'<circle cx="{int(lx_) + 30}" cy="{int(ly_) + 12}" r="11"/>'
+           f'<use href="#i-launch" x="{int(lx_) + 22}" y="{int(ly_) + 4}" width="16" height="16"/></g>')
 # Compass
 cx, cy = WIDTH - 60, HEIGHT - 70
 svg.append(f'<g class="map-compass" transform="translate({cx} {cy})"><path d="M0 -30 L9 0 L0 -6 L-9 0Z"/><text y="-38" text-anchor="middle" font-size="15">N</text></g>')
