@@ -116,16 +116,18 @@ if os.path.exists(_rp):
 # Points of interest (lat, lon). Cottage 9 position is approximate:
 # between private Lost Lake (east) and the Gull Lake Narrows (west).
 HOME = (46.5185, -94.3462)
-POIS = [
+POIS = [  # numbered north -> south
     ("1", "Zorbaz on Gull", 46.5110, -94.3442),
     ("2", "Bar Harbor Supper Club", 46.5080, -94.3499),
-    ("3", "Dock 77 at Quarterdeck", 46.4483, -94.3635),
-    ("4", "Ernie's on Gull", 46.4230, -94.3608),
-    ("5", "Gull Point sandbar (approx.)", 46.4241, -94.3745),
-    ("6", "Gull Lake Dam &amp; Rec Area", 46.4111, -94.3534),
-    ("7", "Grand View Lodge golf", 46.4980, -94.3135),
-    ("8", "Madden's · The Classic", 46.3960, -94.3740),
-    ("9", "Downtown Nisswa by boat: Nisswa Lake Park docks", 46.5193, -94.2907),
+    ("3", "Downtown Nisswa by boat: Nisswa Lake Park docks", 46.5193, -94.2907),
+    ("4", "Grand View Lodge", 46.4931, -94.3157),
+    ("5", "Hole-in-the-Day Bay: Ice Fishing Extravaganza", 46.4770, -94.3050),
+    ("6", "Dock 77 at Quarterdeck", 46.4483, -94.3635),
+    ("7", "Ernie's on Gull", 46.4230, -94.3608),
+    ("8", "Gull Point sandbar (approx.)", 46.4241, -94.3745),
+    ("9", "Gull Lake Dam &amp; Rec Area", 46.4111, -94.3534),
+    ("10", "Madden's on Gull Lake", 46.3960, -94.3740),
+    ("11", "Cragun's Resort &amp; Gull Lake Cruises", 46.3907, -94.3701),
 ]
 
 hx, hy = pt(*HOME)
@@ -156,7 +158,7 @@ if ROUTE:
 
 for num, name, lat, lon in POIS:
     x, y = pt(lat, lon)
-    svg.append(f'<g class="map-poi" data-poi="{num}" style="--i:{num}"><title>{name}</title><circle cx="{x}" cy="{y}" r="13"/><text x="{x}" y="{int(y) + 5}" text-anchor="middle" font-size="15">{num}</text></g>')
+    svg.append(f'<g class="map-poi" data-poi="{num}" style="--i:{num}"><title>{name}</title><circle cx="{x}" cy="{y}" r="13"/><text x="{x}" y="{int(y) + 5}" text-anchor="middle" font-size="{15 if len(num) == 1 else 12.5}">{num}</text></g>')
 
 lx, ly = pt(46.5196, -94.3402)
 svg.append(f'<text class="map-label map-label-lost" x="{lx}" y="{ly}" font-size="12">Lost Lake</text>')

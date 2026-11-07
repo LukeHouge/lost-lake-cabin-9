@@ -229,7 +229,7 @@
     mapFrame.classList.toggle('zoomed', b !== zoomBtns[0]);
     setView(b.dataset.view);
   }));
-  // legend taps: "Downtown Nisswa" zooms to the north end; any spot that's
+  // legend taps: "Downtown Nisswa" (data-zoom="north") zooms to the north end; any spot that's
   // outside the current view (e.g. the sandbar) zooms back out to the whole lake
   const inView = (poi) => {
     const c = $(`.map-poi[data-poi="${poi}"] circle`, mapFrame);
@@ -240,7 +240,7 @@
     return cx > x + 15 && cx < x + w - 15 && cy > y + 15 && cy < y + h - 15;
   };
   $$('.map-legend li[data-poi]').forEach((li) => li.addEventListener('click', () => {
-    if (li.dataset.poi === '9') { if (zoomBtns[1].getAttribute('aria-pressed') !== 'true') zoomBtns[1].click(); }
+    if (li.dataset.zoom === 'north') { if (zoomBtns[1].getAttribute('aria-pressed') !== 'true') zoomBtns[1].click(); }
     else if (!inView(li.dataset.poi)) zoomBtns[0].click();
   }));
 
