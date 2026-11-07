@@ -204,6 +204,33 @@
     });
   }
 
+  // ----- map zoom: whole lake <-> north end (tweens the SVG viewBox) -----
+  const mapSvg = $('.lake-map');
+  const zoomBtns = $$('.map-zoom [data-view]');
+  let zoomAnim = 0;
+  const setView = (target) => {
+    const from = mapSvg.getAttribute('viewBox').split(/\s+/).map(Number);
+    const to = target.split(/\s+/).map(Number);
+    cancelAnimationFrame(zoomAnim);
+    if (!motion) { mapSvg.setAttribute('viewBox', target); return; }
+    const t0 = performance.now(), dur = 900;
+    const step = (now) => {
+      const k = Math.min(1, (now - t0) / dur);
+      const e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+      mapSvg.setAttribute('viewBox', from.map((f, i) => (f + (to[i] - f) * e).toFixed(1)).join(' '));
+      if (k < 1) zoomAnim = requestAnimationFrame(step);
+      else mapSvg.setAttribute('viewBox', target);
+    };
+    zoomAnim = requestAnimationFrame(step);
+    setTimeout(() => mapSvg.setAttribute('viewBox', target), dur + 100);
+  };
+  zoomBtns.forEach((b) => b.addEventListener('click', () => {
+    zoomBtns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    setView(b.dataset.view);
+  }));
+  // tapping "Downtown Nisswa" in the legend zooms to the north end
+  $('.map-legend li[data-poi="9"]')?.addEventListener('click', () => zoomBtns[1]?.click());
+
   // ----- 3. day-to-dusk timeline driven by scroll -----
   const day = $('#day');
   let ticking = false;

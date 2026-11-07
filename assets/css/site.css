@@ -654,3 +654,22 @@ html:not(.no-accents) .ticker-track span:first-child { padding-left: 1.4rem; }
 .season-switch [data-accents][aria-pressed="true"] { background: rgba(255,255,255,.2); }
 .season-switch [data-accents][aria-pressed="false"] { opacity: .6; text-decoration: line-through; }
 @media (max-width: 640px) { .season-switch button { padding: .45em .6em; } }
+
+/* ---------- boat route to Nisswa ---------- */
+.map-route { fill: none; stroke: var(--accent); stroke-width: 4; stroke-linecap: round; stroke-dasharray: .012 .009; }
+html.motion .map-route { opacity: 0; transition: opacity 1s 3.6s; }
+html.motion .map-frame.drawn .map-route { opacity: 1; animation: sail 6s linear infinite; }
+@keyframes sail { to { stroke-dashoffset: -.21; } }
+.map-route.hot, .map-frame:has(.map-poi[data-poi="9"].hot) .map-route { stroke-width: 6; }
+.map-town text { font-family: var(--sans); font-weight: 700; fill: var(--deep); paint-order: stroke; stroke: color-mix(in srgb, var(--sand) 70%, #fff); stroke-width: 4px; }
+.map-label { paint-order: stroke; stroke: color-mix(in srgb, var(--sand) 70%, #fff); stroke-width: 4px; }
+.map-label-water { fill: rgba(255,255,255,.9); stroke: none; }
+.map-legend .legend-star { background: color-mix(in srgb, var(--glow) 22%, transparent); }
+.map-legend .legend-star small { flex-basis: 100%; padding-left: 2.6rem; margin-top: -.2rem; }
+.map-legend .legend-route { cursor: default; font-weight: 600; }
+.map-legend .legend-route i { flex: none; width: 28px; height: 0; border-top: 4px dashed var(--accent); transform: translateY(-3px); }
+.map-frame { position: relative; }
+.lake-map { aspect-ratio: 1000 / 1659; }
+.map-zoom { position: absolute; top: 24px; left: 24px; z-index: 2; display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(255,255,255,.92); box-shadow: 0 6px 18px -8px rgba(0,0,0,.35); }
+.map-zoom button { border: 0; background: transparent; padding: .45em .9em; border-radius: 999px; font: 600 .82rem var(--sans); color: var(--deep); cursor: pointer; }
+.map-zoom button[aria-pressed="true"] { background: var(--deep); color: #fff; }

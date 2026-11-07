@@ -4,7 +4,7 @@ Usage: python3 tools/build_map.py water.json > assets/img/gull-lake-map.svg
 water.json = Overpass `out geom` result for natural=water in the bbox below.
 Map data © OpenStreetMap contributors (ODbL).
 """
-import json, math, sys
+import json, math, os, sys
 
 S, N, W, E = 46.385, 46.545, -94.425, -94.285
 WIDTH = 1000
@@ -94,6 +94,25 @@ def pt(lat, lon):
     x, y = xy(lat, lon)
     return f'{x:.0f}', f'{y:.0f}'
 
+def smooth_open(pts):
+    """Open Catmull-Rom spline through pts as SVG path data."""
+    out = [f'M{pts[0][0]:.1f} {pts[0][1]:.1f}']
+    for i in range(len(pts) - 1):
+        p0 = pts[max(i - 1, 0)]; p1 = pts[i]; p2 = pts[i + 1]; p3 = pts[min(i + 2, len(pts) - 1)]
+        c1 = (p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6)
+        c2 = (p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6)
+        out.append(f'C{c1[0]:.1f} {c1[1]:.1f} {c2[0]:.1f} {c2[1]:.1f} {p2[0]:.1f} {p2[1]:.1f}')
+    return ''.join(out)
+
+ROUTE = None
+_rp = os.path.join(os.path.dirname(__file__), 'data', 'route-raw.json')
+if os.path.exists(_rp):
+    raw = [tuple(p) for p in json.load(open(_rp))]
+    pts = rdp(raw, 4.5)
+    for _ in range(2):  # Chaikin corner-cutting to round off grid corners
+        pts = [pts[0]] + [q for a, b in zip(pts, pts[1:]) for q in ((a[0]*.75 + b[0]*.25, a[1]*.75 + b[1]*.25), (a[0]*.25 + b[0]*.75, a[1]*.25 + b[1]*.75))] + [pts[-1]]
+    ROUTE = smooth_open(pts)
+
 # Points of interest (lat, lon). Cottage 9 position is approximate:
 # between private Lost Lake (east) and the Gull Lake Narrows (west).
 HOME = (46.5185, -94.3462)
@@ -106,6 +125,7 @@ POIS = [
     ("6", "Gull Lake Dam &amp; Rec Area", 46.4111, -94.3534),
     ("7", "Grand View Lodge golf", 46.4980, -94.3135),
     ("8", "Madden's · The Classic", 46.3960, -94.3740),
+    ("9", "Downtown Nisswa by boat: Nisswa Lake Park docks", 46.5193, -94.2907),
 ]
 
 hx, hy = pt(*HOME)
@@ -124,24 +144,26 @@ for label, lat, lon, size, cls in [
     ("GULL LAKE", 46.462, -94.343, 34, "map-label-big"),
     ("Upper Gull", 46.528, -94.3575, 15, "map-label"),
     ("Lake Margaret", 46.4935, -94.381, 15, "map-label"),
-    ("Roy Lake", 46.5345, -94.316, 15, "map-label"),
+    ("Roy Lake", 46.5108, -94.3205, 14, "map-label map-label-water"),
 ]:
     x, y = pt(lat, lon)
     svg.append(f'<text class="{cls}" x="{x}" y="{y}" text-anchor="middle" font-size="{size}">{label}</text>')
 nx, ny = pt(46.5205, -94.2886)
-svg.append(f'<g class="map-town"><circle cx="{nx}" cy="{ny}" r="6"/><text x="{int(nx) - 12}" y="{int(ny) + 5}" text-anchor="end" font-size="17">Nisswa</text></g>')
+svg.append(f'<g class="map-town"><text x="{int(nx) - 2}" y="{int(ny) - 22}" text-anchor="middle" font-size="17">Nisswa</text></g>')
+if ROUTE:
+    svg.append(f'<path class="map-route" pathLength="1" d="{ROUTE}"/>')
 
 for num, name, lat, lon in POIS:
     x, y = pt(lat, lon)
     svg.append(f'<g class="map-poi" data-poi="{num}" style="--i:{num}"><title>{name}</title><circle cx="{x}" cy="{y}" r="13"/><text x="{x}" y="{int(y) + 5}" text-anchor="middle" font-size="15">{num}</text></g>')
 
-lx, ly = pt(46.5205, -94.3405)
-svg.append(f'<text class="map-label map-label-lost" x="{int(lx) + 14}" y="{ly}" font-size="14">Lost Lake</text>')
+lx, ly = pt(46.5196, -94.3402)
+svg.append(f'<text class="map-label map-label-lost" x="{lx}" y="{ly}" font-size="12">Lost Lake</text>')
 svg.append(f'<g class="map-home"><circle class="map-home-pulse" cx="{hx}" cy="{hy}" r="20"/>'
            f'<circle cx="{hx}" cy="{hy}" r="11"/>'
-           f'<g transform="translate({int(hx) - 205} {int(hy) - 62})"><rect width="170" height="42" rx="21"/>'
+           f'<g transform="translate({int(hx) - 85} {int(hy) - 84})"><rect width="170" height="42" rx="21"/>'
            f'<text x="85" y="27" text-anchor="middle" font-size="18">Cottage 9 is here</text></g>'
-           f'<path d="M{int(hx) - 40} {int(hy) - 30} L{int(hx) - 14} {int(hy) - 8}" class="map-home-leader"/></g>')
+           f'<path d="M{int(hx)} {int(hy) - 42} L{int(hx)} {int(hy) - 13}" class="map-home-leader"/></g>')
 # Compass
 cx, cy = WIDTH - 60, HEIGHT - 70
 svg.append(f'<g class="map-compass" transform="translate({cx} {cy})"><path d="M0 -30 L9 0 L0 -6 L-9 0Z"/><text y="-38" text-anchor="middle" font-size="15">N</text></g>')
