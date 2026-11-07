@@ -621,3 +621,36 @@ html.motion .bonfire .flame { animation: flicker .9s ease-in-out infinite altern
   92% { opacity: var(--o); }
   100% { opacity: 0; transform: translate(var(--dx), 104vh); }
 }
+
+/* =========================================================
+   ACCENT ILLUSTRATIONS (toggle: html.no-accents hides them)
+   ========================================================= */
+.ico { width: 1em; height: 1em; display: inline-block; flex: none; vertical-align: -.15em; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+html.no-accents .acc { display: none !important; }
+
+/* 1. ticker: icons replace the ✦ separators */
+.ticker-track span { display: inline-flex; align-items: center; gap: .75rem; }
+.ticker-track .ico { font-size: 1.45rem; color: var(--glow); }
+html:not(.no-accents) .ticker-track span::after { content: none; }
+html:not(.no-accents) .ticker-track span { padding: 1rem 2.1rem 1rem 0; }
+html:not(.no-accents) .ticker-track span:first-child { padding-left: 1.4rem; }
+
+/* 3. perk card icons */
+.perk-ico { display: block; font-size: 2.2rem; color: var(--accent); margin-bottom: .75rem; }
+.perk-new .perk-ico, .perk-wide .perk-ico { color: var(--glow); }
+.perk-new .new + .perk-ico { margin-top: .2rem; }
+
+/* 4. timeline icons */
+.tl-ico { display: block; font-size: 2.1rem; color: var(--glow); margin-bottom: .55rem; }
+
+/* 5. logbook wallpaper */
+.logbook { position: relative; overflow: hidden; }
+.logbook > .wrap { position: relative; }
+.pattern { position: absolute; inset: 0; pointer-events: none; }
+.pattern svg { width: 100%; height: 100%; display: block; }
+
+/* toggle in the preview pill */
+.season-switch .sep { width: 1px; height: 18px; background: rgba(255,255,255,.25); margin: 0 4px; }
+.season-switch [data-accents][aria-pressed="true"] { background: rgba(255,255,255,.2); }
+.season-switch [data-accents][aria-pressed="false"] { opacity: .6; text-decoration: line-through; }
+@media (max-width: 640px) { .season-switch button { padding: .45em .6em; } }

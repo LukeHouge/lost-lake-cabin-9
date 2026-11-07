@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Cottage 9 at Lost Lake Lodge | Gull Lake Cabin Rental, Nisswa MN · Sleeps 10</title>
-  <meta name="description" content="Cottage 9 is a 4-bedroom, 3-bath lake house at Lost Lake Lodge on Gull Lake in Nisswa, Minnesota. It sleeps 10 and has a game room with billiards and a wet bar, a screened porch, and two lakes out the door. Rent the whole house or split it 3BR + 1BR.">
+  <meta name="description" content="Cottage 9 is a 4-bedroom, 3-bath lake house at Lost Lake Lodge on Gull Lake in Nisswa, Minnesota, built new in 2023. It sleeps 10 and has a game room with billiards and a wet bar, a screened porch, and two lakes out the door. Rent the whole house or split it 3BR + 1BR.">
   <link rel="canonical" href="https://lukehouge.github.io/lost-lake-cabin-9/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Cottage 9 · Up North on Gull Lake">
@@ -30,6 +30,9 @@
       var fav = document.getElementById('favicon');
       if (fav) fav.href = 'assets/img/logo-' + s + '.svg';
       d.dataset.autoSeason = auto;
+      var aq = new URLSearchParams(location.search).get('accents'), as = null;
+      try { as = localStorage.getItem('c9-accents'); } catch (e) {}
+      if (aq === 'off' || aq === '0' || (!aq && as === 'off')) d.classList.add('no-accents');
       var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!still) {
         d.classList.add('motion');
@@ -80,6 +83,28 @@
   </script>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-loon" viewBox="0 0 24 24"><path d="M2.5 15.5c3-2.4 9-3 12-1.6.3-2.4 1.7-4 3.7-4 1.3 0 2.2.7 2.4 1.5l2.4.6-2.2.6c-.4 1-1.4 1.6-2.4 2 .8.4 1.3.9 1.6 1.4-3.6 1.6-11.5 1.6-17.5-.5z"/><circle cx="19" cy="11.6" r=".35" fill="currentColor"/><path d="M2 20q2.5-1.5 5 0t5 0 5 0 5 0"/></symbol>
+  <symbol id="i-sunset" viewBox="0 0 24 24"><path d="M7 16.5a5 5 0 0 1 10 0"/><path d="M12 6.5v2.2M5.3 9.8l1.5 1.5M18.7 9.8l-1.5 1.5M2.5 16.5h19M6.5 19.8h11M9.5 22.5h5"/></symbol>
+  <symbol id="i-oars" viewBox="0 0 24 24"><path d="M3 3l11.5 11.5M21 3L9.5 14.5"/><path d="M14.5 14.5c1.6-.6 3.6.4 5 2s2 3.6 1.2 4.3-2.6.3-4.2-1.2-2.6-3.5-2-5.1zM9.5 14.5c-1.6-.6-3.6.4-5 2s-2 3.6-1.2 4.3 2.6.3 4.2-1.2 2.6-3.5 2-5.1z"/></symbol>
+  <symbol id="i-golf" viewBox="0 0 24 24"><path d="M8 21V3l9 3.2L8 9.5"/><path d="M3.5 21c0-1.2 2.5-2.2 5.5-2.2s5.5 1 5.5 2.2"/><circle cx="18" cy="19.2" r="1.4"/></symbol>
+  <symbol id="i-skis" viewBox="0 0 24 24"><path d="M3.5 20.5 18 6c1-1 2.6-.6 2.2.8M20.5 20.5 6 6c-1-1-2.6-.6-2.2.8"/><path d="M9 22v-9M15 22v-9M7.8 20.5h2.4M13.8 20.5h2.4"/></symbol>
+  <symbol id="i-fish" viewBox="0 0 24 24"><path d="M2.5 12c3-4 9.5-5.2 13.5-2l4.5-3.2v10.4L16 14c-4 3.2-10.5 2-13.5-2z"/><circle cx="7" cy="11.2" r=".5" fill="currentColor"/><path d="M10.5 9.5c.8 1.6.8 3.4 0 5"/></symbol>
+  <symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 2.5c2.2 3 4.4 4.6 4.4 7.8a4.4 4.4 0 0 1-8.8 0c0-1.8.9-2.9 1.8-3.8.2 1.5 1 2.4 2 2.6-.5-2.4 0-4.8.6-6.6z"/><path d="M4 21.5l16-4.5M4 17l16 4.5"/></symbol>
+  <symbol id="i-snow" viewBox="0 0 24 24"><path d="M12 2v20M3.3 7l17.4 10M3.3 17l17.4-10"/><path d="M9.6 3.8 12 6.2l2.4-2.4M9.6 20.2 12 17.8l2.4 2.4M3.6 10.4l3.3-.9-.9-3.3M20.4 13.6l-3.3.9.9 3.3M3.6 13.6l3.3.9-.9 3.3M20.4 10.4l-3.3-.9.9-3.3"/></symbol>
+  <symbol id="i-pine" viewBox="0 0 24 24"><path d="M12 2l5 7h-3l4 6h-3l4 5H5l4-5H6l4-6H7z"/><path d="M12 20v2.5"/></symbol>
+  <symbol id="i-canoe" viewBox="0 0 24 24"><path d="M1.5 13.5c4 4.5 17 4.5 21 0z"/><path d="M15.5 3.5l-5 13M14.2 2.8l2.6 1.2-.9 2.2-2.6-1.1z"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M4.5 19.5C4.5 10.5 10 4 20 4c0 10-6 15.5-15.5 15.5z"/><path d="M4.5 19.5 14.5 9.5M9 15h4M12 12V8.5M2.5 21.5l2-2"/></symbol>
+  <symbol id="i-mug" viewBox="0 0 24 24"><path d="M5.5 7.5h10v11.5a2.5 2.5 0 0 1-2.5 2.5H8a2.5 2.5 0 0 1-2.5-2.5z"/><path d="M15.5 10h2.2a2.3 2.3 0 0 1 2.3 2.3v2.4a2.3 2.3 0 0 1-2.3 2.3h-2.2"/><path d="M5.5 7.5c0-1.7 1.4-2.8 2.9-2.2.9-1.4 3-1.4 3.9 0 1.5-.6 3.2.5 3.2 2.2"/></symbol>
+  <symbol id="i-coffee" viewBox="0 0 24 24"><path d="M4 10h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M16 11.5h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 7c-.8-1.2.8-2 0-3.5M12 7c-.8-1.2.8-2 0-3.5"/></symbol>
+  <symbol id="i-rod" viewBox="0 0 24 24"><path d="M3 21 19 3M19 3v10.5"/><path d="M19 13.5a1.6 1.6 0 1 1-1.6 1.6"/><path d="M5 17l2 2"/></symbol>
+  <symbol id="i-sled" viewBox="0 0 24 24"><path d="M3 18.5h10.5a2.2 2.2 0 0 0 0-4.4H5.2"/><path d="M5.2 14.1 7.5 10h5.5l3 3.2h3"/><path d="M11 10l1.6-3.5h2"/><path d="M18.5 13.2v4.6M15.5 19.5h5.2a2 2 0 0 0 1.6-3.2"/><circle cx="6" cy="16.3" r=".5" fill="currentColor"/><circle cx="12" cy="16.3" r=".5" fill="currentColor"/></symbol>
+  <symbol id="i-wave" viewBox="0 0 24 24"><path d="M2 16c2.5 0 3.5-6 8-6 3.4 0 4.6 3.2 3.2 5-1.1-1-2.6-.9-3.4.4"/><path d="M2 20q2.5-1.5 5 0t5 0 5 0 5 0"/><path d="M15 6.5c2-1.7 4.6-2 6.5-1.3"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.5A8 8 0 1 1 9.5 4.5a6.4 6.4 0 0 0 10 10z"/><path d="M17 3.5v2.4M15.8 4.7h2.4"/></symbol>
+  <symbol id="i-tub" viewBox="0 0 24 24"><path d="M3 13h18v2.5a5.5 5.5 0 0 1-5.5 5.5h-7A5.5 5.5 0 0 1 3 15.5z"/><path d="M8 10c-1-1.5 1-2.5 0-4.2M12 10c-1-1.5 1-2.5 0-4.2M16 10c-1-1.5 1-2.5 0-4.2"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24"><path d="M3 16.5V13l2-4.5h11l3 4.5h2v3.5"/><circle cx="7" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/><path d="M8.8 17h6.4M6 12.5h12"/></symbol>
+  <symbol id="i-plate" viewBox="0 0 24 24"><circle cx="12" cy="13" r="6.5"/><circle cx="12" cy="13" r="3.5"/><path d="M2.5 5v5.5a1.5 1.5 0 0 0 3 0V5M4 11.5V21M21 21V5c-2 1-3 3-3 6.5h3"/></symbol>
+</defs></svg>
 
 <a class="skip" href="#main">Skip to content</a>
 
@@ -112,7 +137,7 @@
   <div class="snow" aria-hidden="true"></div>
   <div class="wrap hero-inner">
     <div class="stamp" aria-hidden="true">
-      <span>Gull Lake</span><strong>Up North</strong><span>Nisswa · MN</span>
+      <span>Gull Lake</span><strong>Up North</strong><span>Built 2023</span>
     </div>
     <p class="kicker">
       <span data-only="summer">Summer at the lake</span>
@@ -124,7 +149,7 @@
       <span data-only="fall"><span class="line"><span>Gold leaves, quiet water,</span></span><span class="line"><span><em>a fire going.</em></span></span></span>
       <span data-only="winter"><span class="line"><span>Snowy pines, warm cabin,</span></span><span class="line"><span><em>the whole crew.</em></span></span></span>
     </h1>
-    <p class="hero-lede">Cottage 9 is a four-bedroom, three-level lake house at Lost Lake Lodge on Minnesota's Gull Lake. Docks and the big lake are on one side, a quiet private lake is on the other, and it sleeps 10.</p>
+    <p class="hero-lede">Cottage 9 is a four-bedroom, three-level lake house at Lost Lake Lodge on Minnesota's Gull Lake, built brand new in 2023. Docks and the big lake are on one side, a quiet private lake is on the other, and it sleeps 10.</p>
     <div class="hero-ctas">
       <a class="btn btn-lg" href="#book">Check availability</a>
       <a class="btn btn-lg btn-glass" href="#cabin">Tour the cabin</a>
@@ -132,16 +157,16 @@
   </div>
   <div class="ticker" aria-label="Things to do">
     <div class="ticker-track" data-only="summer">
-      <span>Pontoon cruises</span><span>Wake surfing</span><span>Waterskiing</span><span>Sandbar afternoons</span><span>Tee times</span><span>Walleye at dusk</span><span>Paddle boards</span><span>Boat-up burgers</span><span>Bonfires</span><span>Screened-porch cards</span>
-      <span aria-hidden="true">Pontoon cruises</span><span aria-hidden="true">Wake surfing</span><span aria-hidden="true">Waterskiing</span><span aria-hidden="true">Sandbar afternoons</span><span aria-hidden="true">Tee times</span><span aria-hidden="true">Walleye at dusk</span><span aria-hidden="true">Paddle boards</span><span aria-hidden="true">Boat-up burgers</span><span aria-hidden="true">Bonfires</span><span aria-hidden="true">Screened-porch cards</span>
+      <span><svg class="ico acc" aria-hidden="true"><use href="#i-canoe"/></svg>Pontoon cruises</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-wave"/></svg>Wake surfing</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-wave"/></svg>Waterskiing</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-sunset"/></svg>Sandbar afternoons</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-golf"/></svg>Tee times</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-fish"/></svg>Walleye at dusk</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-oars"/></svg>Paddle boards</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-mug"/></svg>Boat-up burgers</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-fire"/></svg>Bonfires</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-pine"/></svg>Screened-porch cards</span>
+      <span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-canoe"/></svg>Pontoon cruises</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-wave"/></svg>Wake surfing</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-wave"/></svg>Waterskiing</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-sunset"/></svg>Sandbar afternoons</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-golf"/></svg>Tee times</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-fish"/></svg>Walleye at dusk</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-oars"/></svg>Paddle boards</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-mug"/></svg>Boat-up burgers</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-fire"/></svg>Bonfires</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-pine"/></svg>Screened-porch cards</span>
     </div>
     <div class="ticker-track" data-only="fall">
-      <span>Color drives</span><span>Grouse woods</span><span>Fall golf</span><span>Trail rides</span><span>Brewery hops</span><span>Bonfires</span><span>Crisp-morning paddles</span><span>Game day downstairs</span>
-      <span aria-hidden="true">Color drives</span><span aria-hidden="true">Grouse woods</span><span aria-hidden="true">Fall golf</span><span aria-hidden="true">Trail rides</span><span aria-hidden="true">Brewery hops</span><span aria-hidden="true">Bonfires</span><span aria-hidden="true">Crisp-morning paddles</span><span aria-hidden="true">Game day downstairs</span>
+      <span><svg class="ico acc" aria-hidden="true"><use href="#i-leaf"/></svg>Color drives</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-pine"/></svg>Grouse woods</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-golf"/></svg>Fall golf</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-car"/></svg>Trail rides</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-mug"/></svg>Brewery hops</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-fire"/></svg>Bonfires</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-canoe"/></svg>Crisp-morning paddles</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-moon"/></svg>Game day downstairs</span>
+      <span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-leaf"/></svg>Color drives</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-pine"/></svg>Grouse woods</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-golf"/></svg>Fall golf</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-car"/></svg>Trail rides</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-mug"/></svg>Brewery hops</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-fire"/></svg>Bonfires</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-canoe"/></svg>Crisp-morning paddles</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-moon"/></svg>Game day downstairs</span>
     </div>
     <div class="ticker-track" data-only="winter">
-      <span>Ice fishing</span><span>Snowmobiling</span><span>Cross-country skiing</span><span>Snowshoeing</span><span>Sauna &amp; swim spa</span><span>Pool tournaments</span><span>Fireside movies</span><span>Fat biking</span>
-      <span aria-hidden="true">Ice fishing</span><span aria-hidden="true">Snowmobiling</span><span aria-hidden="true">Cross-country skiing</span><span aria-hidden="true">Snowshoeing</span><span aria-hidden="true">Sauna &amp; swim spa</span><span aria-hidden="true">Pool tournaments</span><span aria-hidden="true">Fireside movies</span><span aria-hidden="true">Fat biking</span>
+      <span><svg class="ico acc" aria-hidden="true"><use href="#i-rod"/></svg>Ice fishing</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-sled"/></svg>Snowmobiling</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-skis"/></svg>Cross-country skiing</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-snow"/></svg>Snowshoeing</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-tub"/></svg>Sauna &amp; swim spa</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-moon"/></svg>Pool tournaments</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-fire"/></svg>Fireside movies</span><span><svg class="ico acc" aria-hidden="true"><use href="#i-pine"/></svg>Fat biking</span>
+      <span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-rod"/></svg>Ice fishing</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-sled"/></svg>Snowmobiling</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-skis"/></svg>Cross-country skiing</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-snow"/></svg>Snowshoeing</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-tub"/></svg>Sauna &amp; swim spa</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-moon"/></svg>Pool tournaments</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-fire"/></svg>Fireside movies</span><span aria-hidden="true"><svg class="ico acc" aria-hidden="true"><use href="#i-pine"/></svg>Fat biking</span>
     </div>
   </div>
 </section>
@@ -152,7 +177,7 @@
     <div class="welcome-copy">
       <p class="eyebrow">Welcome to Cottage 9</p>
       <h2>The cabin everyone talks about the whole drive home</h2>
-      <p class="big">It's new-build comfort with an old-school resort around it. The stone fireplace is under vaulted ceilings, the screened porch is up in the pines, and the lower level is made for game night. Everyone gets their own corner, and there's still room for the whole family around one table.</p>
+      <p class="big">Built brand new in 2023, it has modern comfort with an old-school resort around it. The stone fireplace is under vaulted ceilings, the screened porch is up in the pines, and the lower level is made for game night. Everyone gets their own corner, and there's still room for the whole family around one table.</p>
       <ul class="facts" aria-label="At a glance">
         <li><strong data-count="10">10</strong><span>guests</span></li>
         <li><strong data-count="4">4</strong><span>bedrooms</span></li>
@@ -180,25 +205,25 @@
     </div>
     <div class="day-track" aria-hidden="true"><span class="traveler"></span></div>
     <ol class="timeline" data-only="summer">
-      <li data-step="0"><time>7:00</time><h3>Coffee on the porch</h3><p>Loons on the water and fog lifting off the Narrows. Nobody else is up yet.</p></li>
-      <li data-step="1"><time>10:30</time><h3>Pontoon to the sandbar</h3><p>Load up the cooler and the kids and find a spot at Gull Point.</p></li>
-      <li data-step="2"><time>2:00</time><h3>Ski, tube &amp; wake surf</h3><p>Get out on the big lake while the water's still glassy.</p></li>
-      <li data-step="3"><time>5:00</time><h3>Happy hour at the lodge</h3><p>Live music on the patio, or boat over to Zorbaz or Bar Harbor.</p></li>
-      <li data-step="4" class="bonfire"><time>9:30</time><h3>Bonfire on Lost Lake <span class="flame" aria-hidden="true"></span></h3><p>S'mores, stars, and a pool tournament downstairs that goes too late.</p></li>
+      <li data-step="0"><svg class="ico acc tl-ico" aria-hidden="true"><use href="#i-coffee"/></svg><time>7:00</time><h3>Coffee on the porch</h3><p>Loons on the water and fog lifting off the Narrows. Nobody else is up yet.</p></li>
+      <li data-step="1"><svg class="ico acc tl-ico" aria-hidden="true"><use href="#i-canoe"/></svg><time>10:30</time><h3>Pontoon to the sandbar</h3><p>Load up the cooler and the kids and find a spot at Gull Point.</p></li>
+      <li data-step="2"><svg class="ico acc tl-ico" aria-hidden="true"><use href="#i-wave"/></svg><time>2:00</time><h3>Ski, tube &amp; wake surf</h3><p>Get out on the big lake while the water's still glassy.</p></li>
+      <li data-step="3"><svg class="ico acc tl-ico" aria-hidden="true"><use href="#i-sunset"/></svg><time>5:00</time><h3>Happy hour at the lodge</h3><p>Live music on the patio, or boat over to Zorbaz or Bar Harbor.</p></li>
+      <li data-step="4" class="bonfire"><svg class="ico acc tl-ico" aria-hidden="true"><use href="#i-fire"/></svg><time>9:30</time><h3>Bonfire on Lost Lake <span class="flame" aria-hidden="true"></span></h3><p>S'mores, stars, and a pool tournament downstairs that goes too late.</p></li>
     </ol>
     <ol class="timeline" data-only="fall">
-      <li data-step="0"><time>7:00</time><h3>Frost on the dock</h3><p>Coffee by the fireplace while the birches go gold outside.</p></li>
-      <li data-step="1"><time>9:00</time><h3>Into the grouse woods</h3><p>Hunt the public land nearby, or tee off at an uncrowded course.</p></li>
-      <li data-step="2"><time>1:00</time><h3>Color drive</h3><p>Downtown Nisswa, the Paul Bunyan Trail, a brewery stop or two.</p></li>
-      <li data-step="3"><time>5:30</time><h3>Dinner at the lodge</h3><p>The restaurant's been here since 1946. Or grill on the deck.</p></li>
-      <li data-step="4"><time>8:30</time><h3>Fire pit &amp; flannel</h3><p>Then the game on the big screen in the lower-level lounge.</p></li>
+      <li data-step="0"><svg class="ico acc tl-ico" aria-hidden="true"><use href="#i-coffee"/></svg><time>7:00</time><h3>Frost on the dock</h3><p>Coffee by the fireplace while the birches go gold outside.</p></li>
+      <li data-step="1"><svg class="ico acc tl-ico" aria-hidden="true"><use href="#i-pine"/></svg><time>9:00</time><h3>Into the grouse woods</h3><p>Hunt the public land nearby, or tee off at an uncrowded course.</p></li>
+      <li data-step="2"><svg class="ico acc tl-ico" aria-hidden="true"><use href="#i-leaf"/></svg><time>1:00</time><h3>Color drive</h3><p>Downtown Nisswa, the Paul Bunyan Trail, a brewery stop or two.</p></li>
+      <li data-step="3"><svg class="ico acc tl-ico" aria-hidden="true"><use href="#i-plate"/></svg><time>5:30</time><h3>Dinner at the lodge</h3><p>The restaurant's been here since 1946. Or grill on the deck.</p></li>
+      <li data-step="4"><svg class="ico acc tl-ico" aria-hidden="true"><use href="#i-fire"/></svg><time>8:30</time><h3>Fire pit &amp; flannel</h3><p>Then the game on the big screen in the lower-level lounge.</p></li>
     </ol>
     <ol class="timeline" data-only="winter">
-      <li data-step="0"><time>7:30</time><h3>Sunrise on the ice</h3><p>Drill a few holes and go after walleye on Gull Lake.</p></li>
-      <li data-step="1"><time>11:00</time><h3>Hit the trails</h3><p>Snowmobile hundreds of miles of trails, or ski and snowshoe nearby.</p></li>
-      <li data-step="2"><time>3:00</time><h3>Recovery Room</h3><p>Thaw out in the sauna and swim spa right at the resort.</p></li>
-      <li data-step="3"><time>6:00</time><h3>Chili night</h3><p>A big pot on the stove and everyone around the farmhouse table.</p></li>
-      <li data-step="4"><time>8:00</time><h3>Fireside &amp; billiards</h3><p>A movie upstairs, or a pool tournament and the wet bar downstairs.</p></li>
+      <li data-step="0"><svg class="ico acc tl-ico" aria-hidden="true"><use href="#i-rod"/></svg><time>7:30</time><h3>Sunrise on the ice</h3><p>Drill a few holes and go after walleye on Gull Lake.</p></li>
+      <li data-step="1"><svg class="ico acc tl-ico" aria-hidden="true"><use href="#i-sled"/></svg><time>11:00</time><h3>Hit the trails</h3><p>Snowmobile hundreds of miles of trails, or ski and snowshoe nearby.</p></li>
+      <li data-step="2"><svg class="ico acc tl-ico" aria-hidden="true"><use href="#i-tub"/></svg><time>3:00</time><h3>Recovery Room</h3><p>Thaw out in the sauna and swim spa right at the resort.</p></li>
+      <li data-step="3"><svg class="ico acc tl-ico" aria-hidden="true"><use href="#i-plate"/></svg><time>6:00</time><h3>Chili night</h3><p>A big pot on the stove and everyone around the farmhouse table.</p></li>
+      <li data-step="4"><svg class="ico acc tl-ico" aria-hidden="true"><use href="#i-moon"/></svg><time>8:00</time><h3>Fireside &amp; billiards</h3><p>A movie upstairs, or a pool tournament and the wet bar downstairs.</p></li>
     </ol>
   </div>
 </section>
@@ -410,31 +435,32 @@
       <article class="perk perk-photo">
         <img src="images/restaurant-food.webp" alt="Plated salmon dinner with a glass of red wine by the lake" loading="lazy" width="605" height="465">
         <div>
+          <svg class="ico acc perk-ico" aria-hidden="true"><use href="#i-mug"/></svg>
           <h3>Restaurant &amp; bar</h3>
           <p>Lake-view dinners with wine pairings, happy hour, live music nights and Sunday brunch.</p>
         </div>
       </article>
       <article class="perk perk-new">
-        <span class="new">New</span>
+        <span class="new">New</span><svg class="ico acc perk-ico" aria-hidden="true"><use href="#i-tub"/></svg>
         <h3>The Recovery Room</h3>
         <p>A private, reservable space with a swim spa, a sauna and a workout area. It's great after a day on the lake or the trails.</p>
       </article>
       <article class="perk">
-        <h3>Boats &amp; docks</h3>
+        <svg class="ico acc perk-ico" aria-hidden="true"><use href="#i-oars"/></svg><h3>Boats &amp; docks</h3>
         <p>Rent pontoons, fishing boats or the ski boat by the half or full day. Kayaks, canoes and paddle boards are free.</p>
       </article>
       <article class="perk">
-        <h3>Beach &amp; bonfires</h3>
+        <svg class="ico acc perk-ico" aria-hidden="true"><use href="#i-fire"/></svg><h3>Beach &amp; bonfires</h3>
         <p>The Lost Lake beach has a raft, a slide, lounge chairs, fire pits and a playground.</p>
       </article>
       <article class="perk">
-        <h3>Trails &amp; games</h3>
+        <svg class="ico acc perk-ico" aria-hidden="true"><use href="#i-pine"/></svg><h3>Trails &amp; games</h3>
         <p>Walking trails through 80 acres, plus volleyball, basketball, ping pong and shuffleboard.</p>
       </article>
       <article class="perk perk-photo perk-wide">
         <img src="images/resort-aerial.webp" alt="Aerial view of the resort's woods between Lost Lake and Gull Lake" loading="lazy" width="2000" height="1500">
         <div>
-          <h3>80 acres of Up North</h3>
+          <svg class="ico acc perk-ico" aria-hidden="true"><use href="#i-loon"/></svg><h3>80 acres of Up North</h3>
           <p>Mostly preserved forest, with the Narrows on one side and Lost Lake on the other.</p>
         </div>
       </article>
@@ -536,6 +562,7 @@
 
 <!-- ============ GUEST LOGBOOK ============ -->
 <section class="section logbook">
+  <div class="pattern acc" aria-hidden="true"></div>
   <div class="wrap">
     <div class="section-head center">
       <p class="eyebrow">From the guest logbook</p>
@@ -597,6 +624,7 @@
       <h2>Questions, answered</h2>
     </div>
     <details><summary>How do I book Cottage 9?</summary><p>Book online through Lost Lake Lodge or call <a href="tel:+12189632681">(218) 963-2681</a>. Cottage 9 is one of the resort's 4-bedroom cottages, so ask for <strong>Cottage 9</strong> by name. Tell them if you want the whole house, the 3-bedroom main house, or the lower suite.</p></details>
+    <details><summary>How new is the cabin?</summary><p>Brand new. Cottage 9 was built from fall 2022 to spring 2023 and welcomed its first guests in July 2023. Everything from the kitchen to the bedrooms is new construction.</p></details>
     <details><summary>How many people does it sleep?</summary><p>Up to 10 guests. There's a king on the main level, two queens in each of the two upstairs bedrooms, a king on the lower level, and a queen sleeper sofa in the loft.</p></details>
     <details><summary>Check-in, check-out and minimum stay?</summary><p>Check-in is at 4 pm and check-out is at 10 am. There's a 2-night minimum.</p></details>
     <details><summary>Are pets allowed?</summary><p>No. Cottage 9 is pet-free, which is good news for guests with allergies.</p></details>
@@ -640,6 +668,8 @@
   <button data-season-btn="fall">Fall</button>
   <button data-season-btn="winter">Winter</button>
   <button data-season-btn="auto" title="Match today's date">Auto</button>
+  <span class="sep" aria-hidden="true"></span>
+  <button data-accents aria-pressed="true" title="Show or hide the little illustrations">Accents</button>
 </div>
 
 <dialog class="lightbox" aria-label="Photo viewer">

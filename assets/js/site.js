@@ -98,6 +98,34 @@
   if (root.dataset.season === 'fall') setTimeout(dropLeaves, root.classList.contains('intro') ? 1800 : 300);
   if (root.dataset.season === 'winter') setTimeout(dropSnow, root.classList.contains('intro') ? 1800 : 300);
 
+  // ----- accent illustrations: on/off toggle + logbook wallpaper -----
+  const accBtn = $('[data-accents]');
+  const syncAcc = () => accBtn && accBtn.setAttribute('aria-pressed', String(!root.classList.contains('no-accents')));
+  syncAcc();
+  accBtn?.addEventListener('click', () => {
+    const off = root.classList.toggle('no-accents');
+    try { localStorage.setItem('c9-accents', off ? 'off' : 'on'); } catch (e) {}
+    const url = new URL(location.href);
+    off ? url.searchParams.set('accents', 'off') : url.searchParams.delete('accents');
+    history.replaceState(null, '', url);
+    syncAcc();
+  });
+  const pattern = $('.logbook .pattern');
+  if (pattern) {
+    const keys = ['loon', 'sunset', 'oars', 'golf', 'skis', 'fish', 'fire', 'snow', 'pine', 'canoe', 'leaf', 'mug', 'rod', 'wave', 'moon'];
+    let seed = 11;
+    const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+    let out = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1600 900">';
+    for (let y = 18, row = 0; y < 900; y += 74, row++) {
+      for (let x = (row % 2) * 48 + 14; x < 1600; x += 96) {
+        const k = keys[Math.floor(rnd() * keys.length)];
+        const r = ((rnd() - .5) * 34).toFixed(1);
+        out += `<use href="#i-${k}" x="${x}" y="${y}" width="30" height="30" transform="rotate(${r} ${x + 15} ${y + 15})" fill="none" stroke="rgba(255,255,255,.075)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>`;
+      }
+    }
+    pattern.innerHTML = out + '</svg>';
+  }
+
   // ----- lightbox -----
   const dlg = $('.lightbox');
   const dlgImg = $('img', dlg);
