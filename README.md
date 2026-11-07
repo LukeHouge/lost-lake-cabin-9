@@ -6,6 +6,7 @@ Marketing site for Cottage 9, a 4BR/3BA lake house at Lost Lake Lodge on Gull La
 - **Design versions for review:** https://lukehouge.github.io/lost-lake-cabin-9/versions/
 - **Photos:** [images/README.md](images/README.md) (shot list). Process new ones with `tools/process_photos.py` (needs Pillow).
 - **Lake map:** `python3 tools/build_map.py tools/data/osm-water.json`, then paste the output between the MAP markers in `index.html`. Map data © OpenStreetMap contributors.
+- **Before committing CSS/JS changes:** `python3 tools/bust_cache.py` (stamps `?v=` hashes so browsers fetch fresh files).
 - **Theme preview:** add `?season=summer|fall|winter` to any URL.
 
 ## Local preview

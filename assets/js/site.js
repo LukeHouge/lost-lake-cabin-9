@@ -229,8 +229,20 @@
     mapFrame.classList.toggle('zoomed', b !== zoomBtns[0]);
     setView(b.dataset.view);
   }));
-  // tapping "Downtown Nisswa" in the legend zooms to the north end
-  $('.map-legend li[data-poi="9"]')?.addEventListener('click', () => zoomBtns[1]?.click());
+  // legend taps: "Downtown Nisswa" zooms to the north end; any spot that's
+  // outside the current view (e.g. the sandbar) zooms back out to the whole lake
+  const inView = (poi) => {
+    const c = $(`.map-poi[data-poi="${poi}"] circle`, mapFrame);
+    const btn = zoomBtns.find((b) => b.getAttribute('aria-pressed') === 'true');
+    if (!c || !btn) return true;
+    const [x, y, w, h] = btn.dataset.view.split(/\s+/).map(Number);
+    const cx = +c.getAttribute('cx'), cy = +c.getAttribute('cy');
+    return cx > x + 15 && cx < x + w - 15 && cy > y + 15 && cy < y + h - 15;
+  };
+  $$('.map-legend li[data-poi]').forEach((li) => li.addEventListener('click', () => {
+    if (li.dataset.poi === '9') { if (zoomBtns[1].getAttribute('aria-pressed') !== 'true') zoomBtns[1].click(); }
+    else if (!inView(li.dataset.poi)) zoomBtns[0].click();
+  }));
 
   // ----- 3. day-to-dusk timeline driven by scroll -----
   const day = $('#day');

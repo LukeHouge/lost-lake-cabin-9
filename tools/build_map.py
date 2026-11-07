@@ -167,7 +167,7 @@ svg.append(f'<g class="map-home"><circle class="map-home-pulse" cx="{hx}" cy="{h
            f'<text x="85" y="27" text-anchor="middle" font-size="18">Cottage 9 is here</text></g>'
            f'<path d="M{int(hx) - 40} {int(hy) - 30} L{int(hx) - 14} {int(hy) - 8}" class="map-home-leader"/></g>'
            # zoomed view: compact tag straight left, clear of the boat route
-           f'<g class="map-tag-short"><g transform="translate({int(hx) - 118} {int(hy) - 15})"><rect width="92" height="30" rx="15"/>'
+           f'<g class="map-tag-short" display="none"><g transform="translate({int(hx) - 118} {int(hy) - 15})"><rect width="92" height="30" rx="15"/>'
            f'<text x="46" y="20" text-anchor="middle" font-size="14">Cottage 9</text></g>'
            f'<path d="M{int(hx) - 26} {int(hy)} L{int(hx) - 12} {int(hy)}" class="map-home-leader"/></g></g>')
 # Compass
