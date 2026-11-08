@@ -794,3 +794,15 @@ html.motion .map-frame.drawn :is(.map-trail, .map-launch) { opacity: 1; }
 .map-frame.focused .map-zoom { display: none; }
 .area-map .map-poi { cursor: pointer; }
 .map-legend li[data-poi] { cursor: pointer; }
+
+/* ---------- phone fixes (2026-11-07) ---------- */
+.ss-toggle { display: none; }
+@media (max-width: 640px) {
+  .season-switch { left: auto; right: 12px; transform: none; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); padding: 4px; }
+  .season-switch .ss-toggle { display: inline-flex; align-items: center; gap: .35em; }
+  .season-switch.collapsed > :not(.ss-toggle) { display: none; }
+  .season-switch:not(.collapsed) .ss-toggle { display: none; }
+  .lake-card::before { background: linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.45) 30%, color-mix(in srgb, var(--deep-2) 94%, transparent) 62%); }
+}
+
+@media (max-width: 880px) { .area-section .map-frame { position: relative; } }

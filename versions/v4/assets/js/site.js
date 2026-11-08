@@ -189,7 +189,9 @@
     const parse = (v) => v.split(/\s+/).map(Number);
     const apply = (vb) => {
       svg.setAttribute('viewBox', vb.map((n) => n.toFixed(1)).join(' '));
-      svg.style.setProperty('--k', (vb[2] / BASE).toFixed(4));
+      // keep markers the same on-screen size on every device (BASE matched a ~560px-wide desktop map)
+      const cw = svg.clientWidth || 560;
+      svg.style.setProperty('--k', (vb[2] / BASE * Math.min(1.6, Math.max(1, 560 / cw))).toFixed(4));
     };
     const MAP_W = 2400, MAP_H = 2708;
     let focused = null;
@@ -332,6 +334,7 @@
         });
       });
       requestAnimationFrame(() => mapFrame.classList.add('drawn'));
+      window.addEventListener('resize', () => apply(parse(svg.getAttribute('viewBox'))));
     }).catch(() => { holder.innerHTML = '<p class="map-loading">The map could not load. Please refresh.</p>'; });
     onceVisible(mapFrame, load, '0px 0px 600px 0px');
   }
@@ -395,6 +398,18 @@
     $(`[data-map-view="${b.dataset.openMap}"]`)?.click();
     $('#map')?.scrollIntoView({ behavior: motion ? 'smooth' : 'auto' });
   }));
+
+
+  // ----- phones: collapse the theme preview pill to a small button -----
+  const pill = $('.season-switch');
+  const ssToggle = $('.ss-toggle');
+  if (pill && ssToggle) {
+    const small = matchMedia('(max-width: 640px)');
+    const collapse = () => { if (small.matches) { pill.classList.add('collapsed'); ssToggle.setAttribute('aria-expanded', 'false'); } };
+    collapse();
+    ssToggle.addEventListener('click', () => { pill.classList.remove('collapsed'); ssToggle.setAttribute('aria-expanded', 'true'); });
+    pill.addEventListener('click', (e) => { if (e.target.closest('button') && e.target !== ssToggle) setTimeout(collapse, 600); });
+  }
 
   const y = $('#year');
   if (y) y.textContent = new Date().getFullYear();

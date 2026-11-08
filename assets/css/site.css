@@ -705,3 +705,13 @@ html.motion .map-frame.drawn :is(.map-trail, .map-launch) { opacity: 1; }
 .errands { margin-top: 1.6rem; padding: 1.1rem 1.3rem; border-radius: var(--radius-sm); background: var(--card); border: 1px solid var(--line); }
 .errands h3 { font-size: 1.1rem; margin-bottom: .3rem; }
 .errands p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+/* ---------- phone fixes (2026-11-07) ---------- */
+.ss-toggle { display: none; }
+@media (max-width: 640px) {
+  .season-switch { left: auto; right: 12px; transform: none; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); padding: 4px; }
+  .season-switch .ss-toggle { display: inline-flex; align-items: center; gap: .35em; }
+  .season-switch.collapsed > :not(.ss-toggle) { display: none; }
+  .season-switch:not(.collapsed) .ss-toggle { display: none; }
+  .lake-card::before { background: linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.45) 30%, color-mix(in srgb, var(--deep-2) 94%, transparent) 62%); }
+}

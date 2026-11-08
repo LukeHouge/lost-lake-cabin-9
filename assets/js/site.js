@@ -298,6 +298,18 @@
     targets.forEach((t) => io.observe(t));
   }
 
+
+  // ----- phones: collapse the theme preview pill to a small button -----
+  const pill = $('.season-switch');
+  const ssToggle = $('.ss-toggle');
+  if (pill && ssToggle) {
+    const small = matchMedia('(max-width: 640px)');
+    const collapse = () => { if (small.matches) { pill.classList.add('collapsed'); ssToggle.setAttribute('aria-expanded', 'false'); } };
+    collapse();
+    ssToggle.addEventListener('click', () => { pill.classList.remove('collapsed'); ssToggle.setAttribute('aria-expanded', 'true'); });
+    pill.addEventListener('click', (e) => { if (e.target.closest('button') && e.target !== ssToggle) setTimeout(collapse, 600); });
+  }
+
   const y = $('#year');
   if (y) y.textContent = new Date().getFullYear();
 })();
