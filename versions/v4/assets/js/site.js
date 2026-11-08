@@ -191,13 +191,53 @@
       svg.setAttribute('viewBox', vb.map((n) => n.toFixed(1)).join(' '));
       svg.style.setProperty('--k', (vb[2] / BASE).toFixed(4));
     };
+    const MAP_W = 2400, MAP_H = 2708;
+    let focused = null;
+    const backBtn = $('.map-back');
+    const setFocused = (id) => {
+      focused = id;
+      mapFrame.classList.toggle('focused', !!id);
+      if (backBtn) backBtn.hidden = !id;
+    };
+    const tween = (to, dur = 1100) => {
+      const from = parse(svg.getAttribute('viewBox'));
+      cancelAnimationFrame(anim);
+      if (!motion) { apply(to); return; }
+      const t0 = performance.now();
+      const step = (now) => {
+        const k = Math.min(1, (now - t0) / dur);
+        const e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+        apply(from.map((f, i) => f + (to[i] - f) * e));
+        if (k < 1) anim = requestAnimationFrame(step);
+      };
+      anim = requestAnimationFrame(step);
+      setTimeout(() => apply(to), dur + 120);
+    };
+    // smart zoom: fly in close around one marker so its neighbours separate
+    const posOf = (id) => {
+      const g = svg && $(`[data-poi="${id}"]`, svg);
+      const m = g && /translate\(([\d.]+)px,\s*([\d.]+)px\)/.exec(g.getAttribute('style') || '');
+      return m ? [+m[1], +m[2]] : null;
+    };
+    const focusOn = (id) => {
+      const p = posOf(id);
+      if (!p) return;
+      const base = parse(VIEWS[cur]);
+      const w = Math.max(base[2] / 3.4, 230), h = w / .8;
+      const x = Math.min(Math.max(p[0] - w / 2, 0), MAP_W - w);
+      const y = Math.min(Math.max(p[1] - h / 2, 0), MAP_H - h);
+      setFocused(id);
+      tween([x, y, w, h], 900);
+    };
     const goTo = (view) => {
       if (!svg) { cur = view; return; }
-      const from = parse(svg.getAttribute('viewBox')), to = parse(VIEWS[view]);
+      setFocused(null);
+      const to = parse(VIEWS[view]);
       svg.dataset.view = view;
       mapFrame.dataset.view = view;
       cancelAnimationFrame(anim);
-      if (!motion) { apply(to); return; }
+      if (!motion) { apply(to); cur = view; return; }
+      const from = parse(svg.getAttribute('viewBox'));
       const t0 = performance.now(), dur = 1100;
       const step = (now) => {
         const k = Math.min(1, (now - t0) / dur);
@@ -253,10 +293,20 @@
       li.addEventListener('blur', () => hot(null));
       li.addEventListener('click', () => {
         hot(li.dataset.poi);
-        if (li.dataset.zoom === 'north' && cur !== 'north') subBtns[1]?.click();
-        else if (cur === 'north' && !inView(li.dataset.poi)) subBtns[0]?.click();
+        if (cur === 'boating' || cur === 'north') {
+          if (li.dataset.zoom === 'north' && cur !== 'north') subBtns[1]?.click();
+          else if (cur === 'north' && !inView(li.dataset.poi)) subBtns[0]?.click();
+          return;
+        }
+        if (focused === li.dataset.poi) goTo(cur);
+        else focusOn(li.dataset.poi);
+        // on phones the legend sits below the map: bring the map into view
+        if (matchMedia('(max-width: 880px)').matches) mapFrame.scrollIntoView({ behavior: motion ? 'smooth' : 'auto', block: 'start' });
       });
+      li.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); li.click(); } });
     });
+
+    backBtn?.addEventListener('click', () => { hot(null); goTo(cur); });
 
     // lazy-load the map SVG when the section gets close
     const load = () => fetch(holder.dataset.src).then((r) => r.text()).then((txt) => {
@@ -269,8 +319,16 @@
         g.addEventListener('mouseenter', () => hot(g.dataset.poi));
         g.addEventListener('mouseleave', () => hot(null));
         g.addEventListener('click', () => {
-          const li = $(`.map-legend li[data-poi="${g.dataset.poi}"]`);
-          if (li) { hot(g.dataset.poi); li.scrollIntoView({ block: 'nearest', behavior: motion ? 'smooth' : 'auto' }); }
+          const id = g.dataset.poi;
+          hot(id);
+          if (cur !== 'boating' && cur !== 'north') {
+            if (focused === id) goTo(cur); else focusOn(id);
+          }
+          const li = $(`.map-legend li[data-poi="${id}"]`);
+          const copy = li && li.closest('.map-copy');
+          if (copy && copy.scrollHeight > copy.clientHeight + 4) {
+            copy.scrollTo({ top: li.offsetTop - copy.offsetTop - 60, behavior: motion ? 'smooth' : 'auto' });
+          }
         });
       });
       requestAnimationFrame(() => mapFrame.classList.add('drawn'));

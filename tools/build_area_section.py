@@ -89,6 +89,7 @@ for i, (k, label, icon) in enumerate(TABS):
     parts.append('        </div>')
 parts.append('      </div>')
 parts.append('      <figure class="map-frame">')
+parts.append('        <button class="map-back" type="button" hidden>← Full view</button>')
 parts.append('        <div class="map-zoom" role="group" aria-label="Boating map view"><button data-sub="boating" aria-pressed="true">Whole lake</button><button data-sub="north" aria-pressed="false">North end + Nisswa</button></div>')
 parts.append(f'        <div class="map-holder" data-src="../../assets/img/area-map.svg" data-views=\'{json.dumps(views)}\'><p class="map-loading">Loading map…</p></div>')
 parts.append('        <figcaption>Illustrated map. Locations are approximate. Map data © OpenStreetMap contributors.</figcaption>')
