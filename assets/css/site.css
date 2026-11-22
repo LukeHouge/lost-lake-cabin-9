@@ -569,6 +569,12 @@ html.motion .bonfire .flame { animation: flicker .9s ease-in-out infinite altern
 .floor-btn:focus-visible { outline: 3px solid var(--glow); outline-offset: -3px; }
 .floor-btn[aria-selected="true"] { background: var(--accent); border-left-color: var(--accent-dark); }
 .floor-btn[aria-selected="true"] b, .floor-btn[aria-selected="true"] small { color: #fff; }
+/* upper floor: loft sits beside the two-story opening over the great room */
+#tab-upper { position: relative; padding-right: 40%; }
+.open-below { position: absolute; top: 10px; right: 10px; bottom: 0; width: calc(36% - 10px); display: grid; place-items: center; text-align: center; padding: 0 .4rem;
+  border: 2px dashed color-mix(in srgb, var(--accent) 55%, var(--line)); border-bottom: 0; border-radius: 8px 8px 0 0;
+  font-size: .6rem; line-height: 1.3; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); transition: color .3s, border-color .3s; }
+#tab-upper[aria-selected="true"] .open-below { color: rgba(255,255,255,.85); border-color: rgba(255,255,255,.55); }
 .floor-lower { background: color-mix(in srgb, var(--sand) 70%, #b89c74); border-bottom: 0; }
 .ground { position: relative; height: 0; border-top: 4px solid #6f9150; margin: 0 -16px; z-index: 1; }
 .ground span { position: absolute; left: 100%; top: -9px; margin-left: 6px; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); white-space: nowrap; display: none; }
