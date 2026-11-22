@@ -20,7 +20,11 @@ PICKS = {  # output name: (folder, file, max width)
   'deck-sunset': (M, 'IMG_1693.jpeg', 1600),
   'loft': (R, 'Cottage_9.8_PS_120.avif', 1600),
   'lower-lounge': (R, 'Cottage_9.9_PS_120.avif', 1600),
-  'lower-tv': (M, 'IMG_6561.jpeg', 1600),
+  'lower-tv': (M, 'IMG_6561.jpeg', 1600),  # old TV wall, no longer on the homepage
+  'lower-fireplace-front': (M, 'IMG_7672.jpeg', 1200),
+  'lower-fireplace-side': (M, 'IMG_7657.jpeg', 1200),
+  # lower-fireplace-{summer,fall,winter}: IMG_7705.jpeg with hero-summer / hero-fall / hero-winter
+  # warped onto the TV screen (one-off composite, not regenerated here)
   'pool-table': (M, 'IMG_8291.jpeg', 1600),
   'wet-bar': (R, 'Cottage_9.10_PS_120.avif', 1600),
   'bed-king': (R, 'Cottage_9.4_PS_120.avif', 1600),

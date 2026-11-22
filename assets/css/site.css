@@ -554,6 +554,9 @@ html.motion .bonfire .flame { animation: flicker .9s ease-in-out infinite altern
   100% { opacity: 0; transform: translate(var(--dx), 105vh) rotate(var(--rot)); }
 }
 
+/* season variants: only the copy matching the theme shows (e.g. what's on the lower-level TV) */
+html[data-season="summer"] .sv:not(.sv-summer), html[data-season="fall"] .sv:not(.sv-fall), html[data-season="winter"] .sv:not(.sv-winter) { display: none; }
+
 /* ---------- 9. floor explorer ---------- */
 .explorer { display: grid; grid-template-columns: minmax(300px, 380px) 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
 .house-wrap { position: relative; padding-right: 112px; }
